@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Não existe ingrediente repetido aqui!</title>
+</head>
+
+<body>
+    <!-- Yan teve a ideia de criar um programa para criar receitas. Nele, há uma lista no qual o usuário pode adicionar
+    ingredientes.
+    Ao testar o código, verificamos que ele funciona! O problema é que podemos adicionar na lista de uma receita
+    ingredientes repetidos. Altere o código para que os ingredientes repetidos não possam ser adicionados. Você encontra
+    o gabarito facilmente, mas tente primeiro resolver o exercício. -->
+
+
+    <h1>Receitas do Yan</h1>
+
+    <script>
+        var ingredientes = [];
+
+        var quantidade = parseInt(prompt("Quantos ingredientes você vai adicionar?"));
+
+        var contador = 1;
+
+        while (contador <= quantidade) {
+
+            var ingrediente = prompt("Informe o ingrediente " + contador);
+
+            var achou = false;
+            for (var i = 0; i < ingredientes.length; i++) {
+                if (ingrediente == ingredientes[i]) {
+                    achou = true;
+                    alert("Igrediente repetido!");
+                }
+            }
+            if (achou == false) {
+                ingredientes.push(ingrediente);
+                contador++;
+            }
+
+        }
+
+        function pulaLinha() {
+            document.write("<br>");
+        }
+
+        function mostra(frase) {
+            document.write(frase);
+            pulaLinha();
+        }
+
+        for (var i = 0; i < ingredientes.length; i++) {
+            mostra(ingredientes[i]);
+        }
+
+    </script>
+
+</body>
+
+</html>
