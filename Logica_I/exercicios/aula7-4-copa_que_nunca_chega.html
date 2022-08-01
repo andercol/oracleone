@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O ano de copa que nunca chega!</title>
+</head>
+
+<body>
+
+    <!-- Francisco assistiu aos vídeos do treinamento de "Lógica de Programação I" e criou um programa que exibe todos os anos em que ocorreram Copa do Mundo desde 1930 até uma data limite. A data limite quem fornece é o usuário, a informação é requisitada por meio da função prompt() e a conversão do valor digitado para um número é feito pela função parseInt(). Observe o código de Francisco: -->
+
+    <meta charset="UTF-8">
+
+
+    <script>
+
+        function pulaLinha() {
+            document.write("<br>");
+        }
+
+        function mostra(frase) {
+
+            document.write(frase);
+            pulaLinha();
+        }
+
+        var anoCopa = 1930;
+        var limite = parseInt(prompt("Qual é o ano limite?"));
+
+        while (anoCopa <= limite) {
+
+            mostra(anoCopa + " tem copa!");
+            anoCopa = anoCopa + 4;
+        }
+
+        //anoCopa = anoCopa + 4; //- linha está fora do while, logo não incrementa a variavel anoCopa.
+
+        mostra("Ufa! Esses foram os anos de copa até " + limite);
+    </script>
+
+</body>
+
+</html>

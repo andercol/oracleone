@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números pares de 1 a 100</title>
+</head>
+
+<body>
+
+    <!-- Preparado(a) para um exercício que fará você quebrar a cabeça um pouquinho? Usando a instrução while imprima todos os números pares de 1 a 100 e ao final imprima a palavra "FIM". DICA: incremente o contador de dois em dois! -->
+
+    <script>
+
+        function pulaLinha() {
+            document.write("<br>");
+        }
+
+        function mostraTitulo(frase) {
+
+            document.write("<h1>" + frase + "</h1>");
+            pulaLinha();
+        }
+
+        function mostra(frase) {
+
+            document.write(frase);
+            pulaLinha();
+        }
+
+        var contador = 0;
+        mostraTitulo("Números pares de 1 a 100")
+        while (contador <= 100) {
+            mostra(contador);
+            contador = contador + 2;
+        }
+        mostra("FIM !");
+    </script>
+
+</body>
+
+</html>

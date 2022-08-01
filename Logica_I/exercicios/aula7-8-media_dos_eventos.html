@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Média dos eventos</title>
+</head>
+
+<body>
+    <!-- Karol é organizadora de eventos. Em alguns meses ela é capaz de organizar três eventos e em outros ela organiza
+    cinco. Ou seja, a quantidade de eventos organizados por Karol por mês é variável.
+
+    A organizadora de eventos pediu ao seu irmão Kauan, estudante de Ciência da Computação, que criasse um programa no
+    qual ela pode informar o total gasto nos eventos e disso obter uma média das despesas. Essa média ajudará a prever
+    os gastos futuros nos próximos meses. -->
+    <script>
+
+        function pulaLinha() {
+    
+            document.write("<br>");
+        }
+    
+        function mostra(frase) {
+    
+            document.write(frase);
+            pulaLinha();
+        }
+    
+        var totalDeEventos = parseInt(prompt("Informe o total de eventos"));
+    
+        var contador = 1;
+    
+        var totalGastoComEventos = 0;
+        while(contador <= totalDeEventos) {
+            //var totalGastoComEventos = 0; // esta variavel precisa ficar fora do while.
+            var gasto = parseFloat(prompt("Informe total gasto com evento"));
+            totalGastoComEventos = totalGastoComEventos + gasto;
+            contador++;
+        }
+    
+        var media = totalGastoComEventos / totalDeEventos;
+    
+        mostra("A média de gastos é " + media);
+    </script>
+
+</body>
+
+</html>

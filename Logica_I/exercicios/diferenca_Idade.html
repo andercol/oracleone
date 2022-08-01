@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diferença de Idade</title>
+</head>
+
+<body>
+    <script>
+        function pulaLinha() {
+            document.write("<br>");
+        }
+
+        function mostra(diferenca) {
+            document.write("Sua idade é: " + suaIdade);
+            pulaLinha();
+            document.write("A idade do seu irmão é: " + idadeIrmao);
+            pulaLinha();
+            document.write("<strong>Nossa diferença de idade é: " + Math.abs(diferenca) + "</strong>");
+        };
+
+        var suaIdade = prompt("informe sua idade: ");
+        var idadeIrmao = prompt("informe a idade do seu irmão: ");
+
+        var diferenca = suaIdade - idadeIrmao;
+        mostra(diferenca);
+
+    </script>
+
+</body>
+
+</html>
