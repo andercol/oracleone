@@ -14,18 +14,22 @@
     <button>Compare com o meu segredo</button>
 
     <script>
-        var segredo = parseInt(Math.random() * 5);
+        //var segredo = parseInt(Math.random() * 5);
+        var segredos = [5, 7, 10, 2];
         var input = document.querySelector("input");
         input.focus();
 
         function verifica() {
+            var achou = false;
+            for (var posicao = 0; posicao < segredos.length; posicao++) {
 
-            if (input.value == segredo) {
-
-                alert("Você ACERTOU!");
-
-            } else {
-
+                if (input.value == segredos[posicao]) {
+                    alert("Você ACERTOU!");
+                    achou = true;
+                    break;
+                }
+            }
+            if (achou == false) {
                 alert("Você ERROU!!!!!!!!");
             }
             input.value = "";
