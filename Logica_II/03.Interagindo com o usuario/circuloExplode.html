@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circulo que explode</title>
+</head>
+
+<body>
+    <canvas width="600" height="400"></canvas>
+    <script>
+        let tela = document.querySelector('canvas');
+        let pincel = tela.getContext('2d');
+
+        pincel.fillStyle = 'grey';
+        pincel.fillRect(0, 0, 600, 400);
+
+        let corCirculo = ['blue', 'red', 'green'];
+        var color = 0;
+        let raio = 10;
+
+        function desenhaCirculo(evento) {
+
+            let x = evento.pageX - tela.offsetLeft;
+            let y = evento.pageY - tela.offsetTop;
+
+            console.log(evento.shiftKey);
+            /* caso segure a tecla shift e click a bolinha aumenta o diametro */
+
+            if (evento.shiftKey && evento.type == 'click') {
+                raio < 40? raio += 5  : '';
+            }
+            if(evento.altKey && evento.type == 'click'){
+                raio > 5? raio -= 5  : '';
+            }
+
+            pincel.fillStyle = corCirculo[color];
+            pincel.beginPath();
+            pincel.arc(x, y, raio, 0, 2 * 3.14);
+            pincel.fill();
+
+            console.log(x + ',' + y);
+        }
+
+        function mudaCor() {
+            /*caso clique com o botão direiro muda de cor*/
+            color++
+            if (color > 2) {
+                color = 0;
+            }
+
+            return false;
+        }
+
+        tela.oncontextmenu = mudaCor;
+
+        tela.onclick = desenhaCirculo;
+
+    </script>
+</body>
+
+</html>
