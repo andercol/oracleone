@@ -1,0 +1,33 @@
+
+body { 
+    background: #cccccc;
+}
+
+h1{
+    text-align: center;
+    background: #cccccc;
+}
+
+p{
+    text-align: center;
+}
+
+em strong{
+    color: #FF0000;
+}
+
+/* 
+
+HEXADECIMAL 0123456789ABCDEF
+RGB = RED GREEN BLUE
+
+* RR GG BB
+0 = ausência de cor
+F = Máximo de cor
+
+#000000 - PRETO 
+#FFFFFF - BRANCO
+
+rgb(255,255,255) Branco
+rgb(0,0,255) azul
+*/
