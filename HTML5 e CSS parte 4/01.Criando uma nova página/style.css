@@ -253,3 +253,27 @@ p:first-line{
     width: 560px;
     margin: 2em auto;
 }
+
+
+/* seletores avançados CSS3 */
+
+/* // o seletor ">" seleciona apenas as tags filhas direta
+main > p {
+    background: red;
+}
+
+// selecionar só o primeiro paragrafo que vem apos uma imagem
+img + p {
+    background: blue;
+}
+
+// pega todos os paragrafos que vem depois de uma imagem
+img ~ p {
+    background: yellow;
+}
+
+// pega todos paragrafos menos o que tem a classe 'missao'
+.principal p:not(#missao){
+    background: orange;
+}
+ */
