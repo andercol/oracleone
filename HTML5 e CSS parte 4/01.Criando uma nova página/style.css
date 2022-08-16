@@ -265,6 +265,45 @@ p:first-line{
 }
 
 
+@media screen and (max-width: 480px){
+   .caixa, .principal, .conteudo-beneficios, .mapa-conteudo, .video{
+    width: auto;
+   }
+
+   h1{
+    text-align: center;
+   }
+
+   nav{
+    position: static;
+   }
+   .lista-beneficios, .imagem-beneficios{
+    width: 100%;
+   }
+
+   .produtos li{
+    display: block;
+    width: 40%;
+    margin: 30px 1.5%;
+   }
+
+   main form{
+    margin: 40px 0 0 20px;
+   }
+
+   .input-padrao{
+    width: 80%;
+   }
+
+   table {
+    margin: 20px 0 40px 20px;
+   }
+}
+
+
+
+
+
 /* seletores avançados CSS3 */
 
 /* // o seletor ">" seleciona apenas as tags filhas direta
