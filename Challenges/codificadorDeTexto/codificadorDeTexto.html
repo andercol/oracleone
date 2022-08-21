@@ -5,27 +5,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:wght@100&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:wght@100&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="style.css">
+
     <title>Decodificador de Textos</title>
 </head>
 
 <body>
     <header><img class="logo" src="imagens/logo2x.png" alt="logo alura"></header>
     <main>
-        <form action="">
+        <!-- <p id="mm">teste texto na tag p</p> -->
 
-            <fieldset>
-                    <textarea cols="70" rows="30" 
-                    placeholder="Digite seu texto aqui"></textarea>
+        <fieldset>
+            <div class="principal">
+                <textarea id="txtarea" cols="40" rows="15" placeholder="Digite seu texto aqui" onfocus="limpar()"></textarea>
 
-                <div class="result">
-
+                <p><span class="material-symbols-outlined">error</span>Apenas letras minúsculas e sem acento.</p>
+                <div class="buttons">
+                    <button class="btn1" onclick="criptografar()">Criptografar</button>
+                    <button class="btn2" onclick="descriptografar()">Descriptografar</button>
                 </div>
-            </fieldset>
-        </form>
+            </div>
+            <div class="result">
+                <p id="p-result"></p>
+                <img class="img_result" id="img_result" src="imagens/High quality products 1 1@3x.png"
+                    alt="Imagem Menina com Lupa e um diamante">
+                <div class="mensagem_nao_encontrada" id="mensagem_nao_encontrada">
+                    <h2>Nenhuma Mensagem encontrada</h2>
+                    <p>Digite um texto que você deseja criptografar ou descriptografar.</p>
+                </div>
+                <div class="copia" id="copia">
+                    <button class="btn_copia" onclick="copiar()">Copiar</button>
+                </div>
+            </div>
+        </fieldset>
 
     </main>
+
 </body>
+<script src="script_codificador.js"></script>
 
 </html>
