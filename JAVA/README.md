@@ -18,3 +18,32 @@ Onipresença
 -------
 
 Já falamos um pouco sobre o Bytecode que é um código de máquina parecido com o Assembly. Talvez você (como eu!) estranhou o nome Bytecode, no entanto, tem uma explicação bem simples para tal. Existe um conjunto de comandos que a máquina virtual Java entende. Esses comandos também são chamados de opcodes (operation code), e cada opcode possui o tamanho de exatamente 1 Byte! E aí temos um opcode de 1 Byte ou, mais simples, Bytecode. :)
+
+
+
+#### Instalação e o primeiro programa
+
+Nessa aula você escreveu o seu primeiro código Java e aprendemos:
+
+- qual é a diferença entre JRE e JDK
+- como compilar um código fonte Java na linha de comando (`javac`)
+- como executar o Bytecode na linha de comando (`java`)
+- um programa Java deve estar escrito dentro de uma classe (`class`)
+- toda instrução Java deve ser finalizada com `;`
+- para abrir e fechar um bloco usaremos as chaves `{}`
+- um programa Java possui uma entrada que é uma função (método) `main`
+- para imprimir algo no console usamos a instrução `System.out.println()`
+
+
+
+#### Começando com Eclipse
+
+Este capítulo apresentou:
+
+- O papel de um IDE e sua diferença de um editor
+- Como fazer o download do Eclipse IDE
+- Para que serve um workspace
+- O conceito de perspectiva
+- Como criar um projeto Java, inclusive classes e como executá-lo.
+- Como exibir diferentes views
+
