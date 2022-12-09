@@ -107,5 +107,13 @@ Também já vimos alguns atalhos no Eclipse:
 
 ##### Controlando fluxo com laços
 
+Neste capítulo aprendemos:
+
+- A sintaxe do `while` e `for`
+- O operador `+=`
+- O operador `++`
+- Laços aninhados
+- A funcionalidade do `break`
+
 
 
