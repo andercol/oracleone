@@ -1,4 +1,4 @@
-Formação JAVA
+#### Formação JAVA
 
 Antes de mais nada, vamos ver um pouco do que é o Java, o qual te trouxe até aqui: há cerca de vinte anos, quando a linguagem Java nasceu, ela chamava a atenção por conta das seguintes características:
 
@@ -117,3 +117,15 @@ Neste capítulo aprendemos:
 
 
 
+#### Orientação a Objetos
+
+Nessa aula aprendemos sobre atributos e criação de objetos.
+
+Vimos:
+
+- O que é uma classe
+- Como criar uma classe
+- Como criar um objeto ou instância de uma classe
+- O que são atributos
+- Como definir e visualizar valores de atributos
+- Como funciona a atribuição de uma referência à uma variável
