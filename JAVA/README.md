@@ -117,7 +117,7 @@ Neste capítulo aprendemos:
 
 
 
-#### Orientação a Objetos
+#### 3. Orientação a Objetos
 
 Nessa aula aprendemos sobre atributos e criação de objetos.
 
@@ -129,3 +129,21 @@ Vimos:
 - O que são atributos
 - Como definir e visualizar valores de atributos
 - Como funciona a atribuição de uma referência à uma variável
+- 
+
+3. #### Definindo comportamento
+
+Nessa aula falamos sobre o *comportamento* que são os **métodos**.
+
+Vimos:
+
+- como definir métodos com parâmetros e retorno
+- como retornar algo usando a palavra chave `return`
+- como usar a referência `this` para acessar um atributo
+- que podemos passar uma referência como parâmetro do método
+- métodos são chamadas a partir da referência usando o operador `.`
+
+
+
+##### 4. Composição de objetos
+
