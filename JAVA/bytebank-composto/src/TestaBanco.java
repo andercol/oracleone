@@ -15,7 +15,7 @@ public class TestaBanco {
 		
 		contaDoPaulo.titular = paulo;
 
-		System.out.println(contaDoPaulo.saldo);
+		System.out.println(contaDoPaulo.getSaldo());
 		System.out.println(contaDoPaulo.titular.nome);
 		System.out.println(contaDoPaulo.titular);
 		System.out.println(paulo);
