@@ -206,3 +206,15 @@ Nessa aula já entramos mais a fundo na herança. Aprendemos:
 
 
 ##### 3. Entendendo Polimorfismo
+
+
+
+Nessa aula aprendemos que:
+
+- objetos não mudam de tipo;
+- a referência pode mudar, e aí entra o polimorfismo;
+- o polimorfismo permite usar referências mais genéricas para a comunicação com um objeto;
+- o uso de referências mais genéricas permite desacoplar sistemas.
+
+##### 4. Herança e construtores
+
