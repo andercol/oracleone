@@ -229,3 +229,16 @@ Nessa aula, vimos:
 
 ##### 5. Classes e métodos abstratos
 
+Nessa aula aprendemos:
+
+- O que são classes abstratas
+- Para que servem classes abstratas
+- O que são métodos abstratos
+- Para que servem métodos abstratos
+
+
+
+##### 6. Interfaces
+
+
+

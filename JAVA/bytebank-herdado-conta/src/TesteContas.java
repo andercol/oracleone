@@ -9,8 +9,8 @@ public class TesteContas {
             cp.deposita(200.0);
 
             cc.transfere(10.0, cp);
-            System.out.println(cc.getSaldo());
+            System.out.println("cc: " + cc.getSaldo());
 
-            System.out.println(cp.getSaldo());
+            System.out.println("CP: " + cp.getSaldo());
         }
 }
