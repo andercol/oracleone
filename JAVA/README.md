@@ -240,5 +240,22 @@ Nessa aula aprendemos:
 
 ##### 6. Interfaces
 
+![image-20221227080910846](../../../../../AppData/Roaming/Typora/typora-user-images/image-20221227080910846.png)
+
+
+
+![image-20221227123709527](../../../../../AppData/Roaming/Typora/typora-user-images/image-20221227123709527.png)
+
+Nessa aula aprendemos que:
+
+- Não existe herança múltipla em Java.
+- Conceitos de interface.
+- Diferenças entre classes abstratas e interfaces.
+- interfaces são uma alternativa a herança referente ao polimorfismo
+
+
+
+##### 7. Praticando herança e interfaces
+
 
 
