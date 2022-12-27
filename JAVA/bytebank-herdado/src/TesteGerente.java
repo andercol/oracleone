@@ -3,7 +3,7 @@ public class TesteGerente {
 
 	public static void main(String[] args) {
 
-		Autenticavel referencia = Gerente();
+		Autenticavel referencia = new Gerente();
 		
 		Gerente g1 = new Gerente();
 		g1.setNome("Marco");
@@ -22,5 +22,7 @@ public class TesteGerente {
 		System.out.println(g1.getBonificacao());
 
 	}
+
+	
 
 }

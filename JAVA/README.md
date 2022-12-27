@@ -257,5 +257,13 @@ Nessa aula aprendemos que:
 
 ##### 7. Praticando herança e interfaces
 
+Nessa aula, aprendemos:
 
+- Mais a fundo sobre o uso de interfaces
+- Trabalhamos mais a fundo com herança
+- Vimos outras aplicações de heranças e interfaces
+
+
+
+##### 8.
 
