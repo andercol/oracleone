@@ -218,3 +218,14 @@ Nessa aula aprendemos que:
 
 ##### 4. Herança e construtores
 
+Nessa aula, vimos:
+
+- Conceitos de herança, construtores e polimorfismo
+- A utilização da anotação @Override
+- Construtores não são herdados
+- Um construtor da classe mãe pode ser chamado através do `super()`
+
+
+
+##### 5. Classes e métodos abstratos
+

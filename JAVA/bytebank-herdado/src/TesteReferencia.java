@@ -9,9 +9,6 @@ public class TesteReferencia {
 		g1.setNome("Marcos");
 		g1.setSalario(5000.0);
 		
-		Funcionario f = new Funcionario();
-		f.setNome("Funcionario");
-		f.setSalario(2000.0);
 		
 		EditorVideo ev = new EditorVideo();
 		ev.setNome("EditorVideo");
@@ -20,7 +17,6 @@ public class TesteReferencia {
 		ControleBonificacao controle = new ControleBonificacao();
 		
 		controle.registra(g1);
-		controle.registra(f);
 		controle.registra(ev);
 		
 		//System.out.println(controle.getSoma());
