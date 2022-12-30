@@ -278,7 +278,26 @@ Nessa aula, aprendemos:
 - Como utilizar o Eclipse e sua perspectiva de debug.
 - Como alternar entre perspectivas do Eclipse.
 
-##### 2. Introdução a exceções
+##### 2. Introdução a exceções, try catch
+
+Nessa aula, aprendemos:
+
+- O que são exceções, para que servem e porquê utilizá-las.
+- Como analisar o rastro de exceções, ou *stacktrace*.
+- Tratar exceções com os blocos `try-catch`.
+- Manipular uma exceção lançada dentro do bloco catch.
+- Tratar múltiplas exceções com mais de um bloco catch ou usando *Multi-Catch* utilizando o *pipe* (**`|`**).
+
+##### 3. Lançamento de exceções
+
+Nesta aula, aprendemos:
+
+- Como lançar exceções.
+- Como atribuir uma mensagem à exceção.
+
+##### 5. Checked e Unchecked
+
+
 
 
 
