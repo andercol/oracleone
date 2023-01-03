@@ -391,3 +391,56 @@ Se você fez o exercício [Será que o Miguel entendeu a aula?](https://cursos.a
 - Exceções são separadas em duas grandes categorias: aquelas que são obrigatoriamente verificadas pelo compilador e as que não são verificadas.
 - As primeiras são denominadas *checked* e são criadas através do pertencimento a uma hierarquia que não passe por `RuntimeException`.
 - As segundas são as *unchecked*, e são criadas como descendentes de `RuntimeException`.
+
+
+
+##### 6. Aplicando Exceções
+
+![image-20230103081226399](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230103081226399.png)
+
+
+
+
+
+![image-20230103182641141](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230103182641141.png)
+
+
+
+
+
+Anteriormente, criamos a nossa própria exceção `SaldoInsuficienteException`, do tipo *Unchecked*. Ou seja, ela estende a classe `RuntimeException` e o compilador não nos obriga a fazer nenhum tratamento.
+
+Testaremos também a mesma exceção como *Checked*. Ela estenderá diretamente da classe `Exception` e verá o tratamento. Mas, como faremos esse tratamento?
+
+Repare que, do jeito que a exceção está agora, o compilador não reclama por não ter um tratamento, visto que ela é *unchecked*, mas não tem problema se criarmos um `try-catch`:
+
+
+
+![image-20230103183019901](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230103183019901.png)
+
+No vídeo, usamos uma exceção com o nome `SaldoInsuficienteException`. Discutir nomes pode ser algo subjetivo e exige conhecimentos sobre o assunto. Ou seja, é pauta de longas discussões, mas acreditamos que um nome um pouco mais genérico para nossa exceção também seria uma solução adequada.
+
+Por exemplo, a exceção poderia se chamar `SacaException` ou `ContaException`. Repare que usamos o nome do método ou da classe. Para detalhar mais o problema (valor do saldo, etc) podemos utilizar a mensagem da exceção, como já fizemos no curso:
+
+```cpp
+throw new SacaException("Valor invalido: Saldo: " + this.saldo + ", Valor: " + valor);COPIAR CÓDIGO
+```
+
+Dessa forma, caso tenha outro problema, basta alterar a mensagem.
+
+De qualquer forma, saiba que encontrar o nome perfeito para as suas classes e métodos não é uma tarefa fácil e pode tomar o seu tempo. Em alguns casos, já encontramos nomes nas classes que deixaram claro que isso é apenas algo provisório e que deve ser alterado quando houver um consenso no nome.
+
+
+
+O que aprendemos?
+
+Nessa aula, aprendemos e praticamos:
+
+- como criar um bloco `catch` genérico usando a classe `Exception`;
+- como criar uma exceção nova `SaldoInsuficienteException`;
+- como transformar a exceção em *checked* ou *unchecked*.
+
+
+
+##### 7. Finally e try with resources
+
