@@ -1,6 +1,6 @@
 
-public class MinhaExcecao extends Exception { //checked
-	
+public class MinhaExcecao extends Exception{ 
+
 	public MinhaExcecao(String msg) {
 		super(msg);
 	}
