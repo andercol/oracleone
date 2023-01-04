@@ -661,5 +661,215 @@ O mundo Java possui uma série de ".jar"s, caso você queira criar um gráfico o
 
 
 
+**3 . JAR executavel (opcional)**
+
+Nesta aula, iremos nos aprofundar na questão das bibliotecas jar.
+
+A forma como criamos um arquivo jar em nosso projeto será a mais comum quando utilizamos esse recurso.
+
+Há na internet alguns repositórios de ".jar" que podem ser baixados; existem, ainda, ferramentas que podem nos auxiliar na plena utilização de ".jar", como quantas bibliotecas deste tipo precisaremos em um determinado projeto.
+
+Há, também, ferramentas que ajudam a gerenciar as dependências que uma biblioteca ".jar" pode vir a ter, como Maven; na Alura temos [um curso](https://cursos.alura.com.br/course/maven-build-do-zero-a-web) dedicado a esta ferramenta. Quem utiliza o .NET sabe o que o Visual Studio possui um gerenciador de dependências integrado, o que não ocorre com o Eclipse.
+
+No entanto, existem outras possíveis aplicações para a o ".jar". Na Alura, temos uma série de pastas com o nome dos professores e seus respectivos cursos. Juntamente com estas pastas temos o um arquivo ".jar" chamado `revisor-beta.jar`. Este ".jar" não foi pensado para ser uma biblioteca e ser usado através do desenvolvedor, mas sim uma ferramenta disponível para que os instrutores possam executar códigos e revisar a nomenclatura dos vídeos. Ou seja, este ".jar" foi pensado para o **usuário final** e não para o desenvolvedor.
+
+Veremos rapidamente como esse ".jar" voltado para o usuário funciona; primeiramente, acessaremos o terminal e buscaremos por `revisor-beta.jar`
+
+```ruby
+Last login: Fri Mar 9 11:01:12 on console
+Aluras - iMac:~ alura$ cd /Volumes/Dados_MAC/ 
+Aluras - iMac: DADOS_MAC alura$ 1s
+danilo-maximo     flavio-almeida      nico steppat
+fabio-chaves      leonardo-codeiro    revisor-beta.jar
+Aluras-iMac:DADOS_MAC alura$COPIAR CÓDIGO
+```
+
+Para que possamos executar o ".jar", precisamos utilizar a máquina virtual. Não iremos copiar esse ".jar" e cola-lo no Eclipse, pois trata-se de uma aplicativo para o usuário final.
+
+```ruby
+Last login: Fri Mar 9 11:01:12 on console
+Aluras - iMac:~ alura$ cd /Volumes/Dados_MAC/ 
+Aluras - iMac: DADOS_MAC alura$ 1s
+danilo-maximo     flavio-almeida      nico steppat
+fabio-chaves      leonardo-codeiro    revisor-beta.jar
+Aluras-iMac:DADOS_MAC alura$ java -jar revistor-beta.jar
+COPIAR CÓDIGO
+```
+
+Ao executarmos o ".jar", percebam que há uma interface gráfica, portanto existem classes no mundo Java que possibilitam a construção de uma caixa de diálogo com botões.
+
+![interface jar](https://s3.amazonaws.com/caelum-online-public/843-java-packages/03/3_3_26_interface+jar.png)
+
+Faremos algo parecido para a nossa aplicação. Não criaremos uma janela com botões, pois isso demandaria outro curso que se articule, mas criaremos um ".jar" que possa ser executado.
+
+De volta ao Eclipse, abriremos novamente o projeto `bytebank-herdado-conta` e novamente criaremos um ".jar", mas desse vez com uma finalidade diferente: a aplicação utilizada pelo cliente.
+
+Com o projeto `bytebank-herdado-conta` selecionado, pressionaremos o botão direito e escolheremos a opção "Export". Na caixa de diálogo aberta, selecionaremos o `JAR file` dentro da pasta `Java`.
+
+![jar file](https://s3.amazonaws.com/caelum-online-public/843-java-packages/03/3_3_27_jar+file.png)
+
+Como já sabemos, não iremos exportar os arquivos de configuração do Eclipse. Selecionaremos a pasta `src` e os três pacotes. A documentação (`doc`) também não será exportada. Modificaremos o nome do arquivo ".jar" para `bytebank-1.0-executavel`.
+
+![configurações de exportação do arquivo jar](https://s3.amazonaws.com/caelum-online-public/843-java-packages/03/3_3_28_configuracoes+de+exportacao+do+arquivo+jar.png)
+
+Assim feito, pressionaremos o botão "Next" para prosseguirmos com as configurações de exportação.
+
+Veremos uma nova caixa de diálogo que apresenta opções a serem selecionadas, são eles "Export class files with compile errors" e "Export class files with compile warnings". As duas opções devem ser selecionadas, pressionaremos "Next".
+
+![nova caixa de diálogo jar](https://s3.amazonaws.com/caelum-online-public/843-java-packages/03/3_3_29_nova+caixa+de+dialgo+jar.png)
+
+Na próxima caixa de diálogo, veremos que na parte inferior existe o campo "Select the class of the application entry point". Nós deveríamos direcionar a entrada da aplicação; qualquer aplicação Java sendo executada mediante um ".jar" se inicia por um método `main()`, e esse método está dentro de uma classe, portanto precisamos definir de alguma forma qual será nossa classe inicial a ser enxergada pela máquina virtual como *entry point*.
+
+Selecionaremos o botão "Browse" e serão exibidas as três classes que possuem o método `main()` no projeto, são elas `TesteContas`, `TesteSaca` e `TesteTributaveis`. Selecionaremos `TesteContas`, pois essa classe contem o `System.out.println()`, o que significa que teremos uma saída para verificar se a execução da aplicação funcionou.
+
+![classes que contém o main](https://s3.amazonaws.com/caelum-online-public/843-java-packages/03/3_3_30_classes+que+contem+o+main.png)
+
+A entrada da aplicação ou *entry point*, portanto, passou a ser `br.com.bytebank.baco.test.TesteContas`.
+
+Para executarmos o arquivo ".jar" `bytebank-1.0-executavel`, iremos até o terminal e acionaremos o comando `java -jar`.
+
+```ruby
+Last login: Fri Mar 9 11:01:12 on console
+Aluras - iMac:~ alura$ cd /Volumes/Dados_MAC/ 
+Aluras - iMac: DADOS_MAC alura$ 1s
+danilo-maximo     flavio-almeida      nico steppat
+fabio-chaves      leonardo-codeiro    revisor-beta.jar
+Aluras-iMac:DADOS_MAC alura$ java -jar revistor-beta.jar
+Alura -iMac:DADDOS_MAC alura$ cd
+Alura- iMac: alura$ pwd
+/Users/alura 
+Aluras-iMac:~ alura$ cd Desktop/
+Aluras-iMac: Desktop alura$ 1s
+Screen Shot 20-03-09 at 13-40-20-png desktop
+bytebank-1.0-executavel.jar
+Aluras-iMac:Desktop alura$ java -jar bytebank-1.0-executavel.jar
+COPIAR CÓDIGO
+```
+
+Dentro do ".jar" existe uma configuração que se comunica com a máquina virtual indicado que a classe `TesteContas` contém o método `main()`. Ao executarmos o ".jar", perceberemos que não existe uma janela de diálogo com botões, pois não desenvolvemos nenhum tipo de interface gráfica. São exibidos apenas os valores de saída da console.
+
+```makefile
+CC:89.0
+CP:210.0
+COPIAR CÓDIGO
+```
+
+São os mesmos valores exibidos pelo Eclipse na linha de comando quando executamos a classe `TesteConta`.
+
+Com isso, provamos que é possível criar um ".jar" voltado para o usuário final.
+
+Faremos um pequeno teste: Transferiremos o arquivo ".jar" que acabamos de gerar (`bytebank-1.0-executavel`) para o projeto `bytebank-biblioteca`, na pasta `libs`.
+
+![jar executável como biblioteca](https://s3.amazonaws.com/caelum-online-public/843-java-packages/03/3_3_31_jar+como+biblioteca.png)
+
+Feito isso, selecionaremos o ".jar" e pressionaremos o botão direito e escolheremos as opções "Build Path > Add to Build Path", ou seja, adicionaremos esse ".jar" como se fosse uma biblioteca.
+
+Ao abrirmos o arquivo, veremos os pacotes do projeto como o esperado, no entanto há uma pasta `META-INF`, uma pasta de configuração que contém um arquivo denominado `MANIFES.MF`.
+
+Dentro desse arquivo há um conteúdo muito simples, contém a versão do arquivo e seu `main` class.
+
+```makefile
+Manifest-Version: 1.0
+Main-Class: br.com.bytebank.banco.test.TesteContas
+COPIAR CÓDIGO
+```
+
+Vemos como seria um ".jar" executável, que apresenta algumas diferenças. Nas próximas aulas falaremos de outras bibliotecas padrão do mundo Java.
+
+Sabemos que um código produzido por um desenvolvedor Java pode ser utilizado por outros desenvolvedores. Nesse sentido, documentar o código e facilitar seu uso por outros desenvolvedores é uma boa prática a ser seguida.
+
+Sobre a geração de documentação, podemos usar o Javadoc, já para distribuição podemos empacotar a aplicação em um `jar`. Vamos começar pelo Javadoc.
+
+## Exercício Javadoc
+
+> O Javadoc só estará disponível para instalações de JDK's e não para JRE's. Certifique-se de estar usando uma JDK.
+
+1 - Quando criamos nossas classes, nada mais justo do que adicionarmos a informação sobre o autor. Nesse sentido, vamos alterar a classe `Cliente.java` e nela adicionar a meta informação sobre o autor e sua versão.
+
+```kotlin
+/**
+* Classe que representa um cliente no ByteBank
+*
+* @author Nico Steppat
+* @version 0.1
+*/
+public class Cliente {
+    /* código omitido */
+}COPIAR CÓDIGO
+```
+
+> Lembre-se que através do atalho `/**` o Eclipse automaticamente adiciona a documentação com `@author` para você. Vale a pena se habituar com esse atalho.
+
+2 - Faça a mesma coisa para a classe `Conta.java`.
+
+3 - Sabemos que uma documentação pode ir além do nome do autor e versão, por exemplo, documentando métodos e construtores. Utilizando o atalho `/**`, documente o construtor da classe `Conta.java`. O resultado da documentação deve ficar assim:
+
+```java
+/**
+* @param agencia
+* @param numero
+*/
+public Conta(int agencia, int numero) {
+    /* código omitido */
+}COPIAR CÓDIGO
+```
+
+O atalho `/**` apenas adiciona a informação sobre os parâmetros do método, sendo de responsabilidade do desenvolvedor completar a documentação.
+
+```java
+/**
+* Construtor para inicializar o objeto Conta a partir da agencia e numero
+* @param agencia
+* @param numero
+*/
+public Conta(int agencia, int numero) {
+    /* código omitido */
+}COPIAR CÓDIGO
+```
+
+4 - Ainda na classe `Conta.java`, documente o método `saca`. Utilize mais uma vez o atalho `/**`:
+
+```java
+/**
+* Valor precisa ser menor ou igual ao saldo
+* @param valor 
+* @throws SaldoInsuficienteException
+*/
+public void saca(double valor) throws SaldoInsuficienteException {
+    /* código omitido */
+}COPIAR CÓDIGO
+```
+
+5 - Através do *Quick Access*, procure por **Javadoc** em `View`. Selecionando a opção, será exibida a aba "Javadoc". Experimente clicar nas classes que você acabou de documentar. Na aba "javadoc" será exibida a documentação da classe.
+
+6 - Além de exibirmos a documentação clicando em cada classe documentada, podemos gerar a documentação como arquivo para ser consultado. Para isso, acesse o menu `Project -> Generate Javadoc`.
+
+Na lista de projetos exibidos, não esqueça de selecionar o projeto `bytebank-herdando-conta`. Certifique-se que em `Javadoc command` esta preenchido com o caminho da ferramenta `javadoc`. Utilize na opção *User standard docket* o caminho padrão projeto já preenchido, sem qualquer alteração. Por fim, clique no botão "Finish" para gerar a documentação.
+
+7 - Verifique a pasta `doc` gerada com a documentação. Acesse o arquivo `doc/resources/index.html`. Essa página é o ponto de entrada para a documentação. Passeie pelas classes documentadas verificando o resultado.
+
+Java é uma plataforma de desenvolvimento completa que se destaca com sua grande quantidade de projetos *open source*. Para a maioria dos problemas no dia a dia do desenvolvedor já existem bibliotecas para resolver. Ou seja, se você gostaria de se conectar com um banco dados, ou trabalhar no desenvolvimento web, na área de data science, criação de serviços ou Android, já existem bibliotecas para tal, muitas vezes mais do que uma.
+
+Aí existe a necessidade de organizar, centralizar e versionar os JARs dessa biblioteca e gerenciar as dependências entre elas. Para resolver isso, foram criadas ferramentas especificas e no mundo Java se destacou o Maven. O Maven organiza os JARs (código compilado, código fonte e documentação) em um repositório central que é publico e pode ser pesquisado:
+
+https://mvnrepository.com/
+
+Lá você pode ver e até baixar os JARs, mas o melhor é que a ferramenta Maven pode fazer isso para você. Se ficou interessado em aprender o Maven que ainda tem outros recursos bem legais, dá uma olhada no nosso curso especifico:
+
+[Maven: Build do zero a web](https://cursos.alura.com.br/course/maven-build-do-zero-a-web)
+
+Obs: Se você é usuário Linux, o Maven é bem parecido com os gerenciadores `apt` ou `rpm`. No MacOS existe o `brew` com o mesmo propósito. No mundo .Net temos o `nuget` e a plataforma node.js usa `npm`. Gerenciar dependências é um problema do cotidiano do desenvolvedor, e cada sistema ou plataforma possui a sua solução.
+
+Nessa aula mais leve vimos e aprendemos:
+
+- quais comentários e tags (anotações) a usar para definir o *javadoc*
+- como gerar o *javadoc* no Eclipse
+- que *javadoc* é uma documentação para desenvolvedores
+- que as classes Java padrão também usam *javadoc*
+- como criar nossa própria biblioteca através do JAR (**J\**ava \**AR**chive)
+- como importar a biblioteca no novo projeto
+- como criar um JAR executável
 
 
+
+**4. Distribuição do seu código**
