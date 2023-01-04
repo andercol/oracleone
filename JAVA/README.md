@@ -872,4 +872,132 @@ Nessa aula mais leve vimos e aprendemos:
 
 
 
-**4. Distribuição do seu código**
+**4. O pacote java.lang**
+
+Quando falamos sobre exceções já vimos várias classes como `Exception`, `RuntimeException`, `NullPointerException` ou `ArithmeticException`.
+
+Todas essas classes vem do pacote `java.lang` e por isso não era preciso importá-las.
+
+Conheceremos um conceito fundamental da `String`: uma vez que foi criada, ela não poderá ser modificada posteriormente. Chamamos o conceito de um objeto não poder ser alterado de **imutabilidade**. Caso você queira alterar algo em uma `String`, você terá de criar uma `String` que refletirá uma nova ação, ou seja, teremos dois objetos, como duas "Aluras", sendo uma com "A" e outra com "a".
+
+Ao consultarmos a documentação oficial, veremos que o `replace()` retorna uma String.
+
+Se quisermos imprimir `alura`, deveremos criar uma `String` que chamaremos de `outra`, e que apontará para o objeto de nosso interesse.
+
+```typescript
+package br.com.bytebank.banco.test;
+
+public class TesteString { 
+
+    public static void main(String[] args) { 
+
+        String nome = "Alura";
+
+        String outra = nome.replace("A", "a");
+
+        System.out.println(outra);
+    }
+}
+COPIAR CÓDIGO
+```
+
+Com isso, temos o resultado impresso de `alura`.
+
+Na verdade, temos duas `String` na memória, sendo uma `nome` que aponta para o objeto `Alura` e a `String` `outra` que aponta para um novo objeto, no caso, `alura`.
+
+Todos os métodos funcionam nessa linha: devolvem uma nova `String`, respeitando o conceito de imutabilidade. Esse é um conceito importante e algumas classes do nosso projeto seguem essa ideia.
+
+Nem todas classes são imutáveis, a nossa classe `Conta` não é imutável, afinal a ideia de uma conta é necessariamente dinâmica, o saldo de uma conta está sempre em movimento e transformação.
+
+Nos vídeos talvez você tenha percebido que alguns métodos da classe `String` recebem uma variável do tipo `CharSequence`. O tipo `CharSequence` é uma interface que a própria classe `String` implementa (pois uma `String` é uma sequência de caracteres!):
+
+```java
+public class String implements CharSequence {COPIAR CÓDIGO
+```
+
+Quando usamos a classe `String` até poderíamos declarar a variável com o tipo da interface, mas isso é raro de se ver:
+
+```bash
+CharSequence seq = "é uma sequencia de caracteres";COPIAR CÓDIGO
+```
+
+O interessante é que existem outras classes que também implementam a interface `CharSequence`. Em outras palavras, existem outras classes que são sequências de caracteres além da classe `String`. Por quê?
+
+# A classe `StringBuilder`
+
+Vimos que a classe `String` é especial pois gera objetos imutáveis. Isso é considerado benéfico pensando no design mas é ruim pensando no desempenho (e por isso devemos usar aspas duplas na criação, pois a JVM quer contornar os problemas no desempenho com otimizações).
+
+Agora vem um problema: imagina que você precisa criar um texto enorme e precisa concatenar muitas `String`, por exemplo:
+
+```makefile
+String texto = "Socorram";
+texto = texto.concat("-");
+texto = texto.concat("me");
+texto = texto.concat(", ");
+texto = texto.concat("subi ");
+texto = texto.concat("no ");
+texto = texto.concat("ônibus ");
+texto = texto.concat("em ");
+texto = texto.concat("Marrocos");
+System.out.println(texto); COPIAR CÓDIGO
+```
+
+Nesse pequeno exemplo já criamos vários objetos, só porque estamos concatenando algumas Strings. Isso é nada bom pensando no desempenho e para resolver isso existe a classe `StringBuilder` que ajuda na concatenação de Strings de forma mais eficiente.
+
+Veja o mesmo código usando o `StringBuilder`:
+
+```go
+StringBuilder builder = new StringBuilder("Socorram");
+builder.append("-");
+builder.append("me");
+builder.append(", ");
+builder.append("subi ");
+builder.append("no ");
+builder.append("ônibus ");
+builder.append("em ");
+builder.append("Marrocos");
+String texto = builder.toString();
+System.out.println(texto);COPIAR CÓDIGO
+```
+
+O `StringBuilder` é uma classe comum. Repare que usamos o `new` para a criação do objeto. Além disso, como o objeto é mutável, utilizamos a mesma referência, sem novas atribuições.
+
+# A interface CharSequence
+
+Agora o legal é que a classe `StringBuilder` também implementa a interface `CharSequence`:
+
+```java
+public class StringBuilder implements CharSequence {COPIAR CÓDIGO
+CharSequence cs = new StringBuilder("também é uma sequencia de caracteres");COPIAR CÓDIGO
+```
+
+Isso faz que alguns métodos da classe `String` saibam trabalhar com o `StringBuilder`, por exemplo:
+
+```java
+String nome = "ALURA";
+CharSequence cs = new StringBuilder("al");
+
+nome = nome.replace("AL", cs);
+
+System.out.println(nome);COPIAR CÓDIGO
+```
+
+Vice-versa a classe `StringBuilder` tem métodos que recebem o tipo `CharSequence`. Dessa forma podemos trabalhar de maneira compatível com as duas classes, baseado numa interface comum.
+
+
+
+O que aprendemos?
+
+Nessa aula aprendemos e conhecemos:
+
+- o *package* `java.lang` é o único pacote que não precisa ser importado
+- nele tem classes fundamentais que qualquer aplicação precisa, como a classe `String` e `System`
+- objetos da classe `String` são imutáveis e usamos uma sintaxe literal para criar (*object literal*)
+- qualquer método de alteração da classe `String` devolve uma nova `String` que representa a alteração
+- a classe `String` é uma `CharSequence`
+- se precisamos concatenar muitos `String` devemos usar a classe `StringBuilder`
+- vimos vários métodos da classe String como `trim`, `charAt`, `contains`, `isEmpty`, `length`, `indexOf`, `replace`
+
+
+
+**5. O pacote java.lang.Object**
