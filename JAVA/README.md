@@ -451,3 +451,46 @@ Nessa aula, aprendemos:
 - que o bloco `finally` é sempre executado, sem ou com exceção;
 - como usar o *try-with-resources*.
 
+-----------------------------------------------------
+
+
+
+### Conhecer as principais bibliotecas
+
+#### **Java e java.lang: programe com a classe Object e String**
+
+**1 . Organizando as classes com Pacotes**
+
+Neste treinamento falaremos sobre a linguagem, seus pacotes como java.lang. Se você já assistiu aos cursos de orientação ao objeto, herança, interface e polimorfismo, você está no lugar certo e pode avançar nos seus conhecimentos assistindo estas aulas.
+
+Organizaremos melhor nosso código por meio dos pacotes. Feito isso, poderemos pensar em como distribuir e documentar o que escrevemos.
+
+Já que estamos falando sobre pacotes, veremos o primeiro fundamental da linguagem Java, o `java.lang`, e dentro dele as duas classes `String` do `java.object`.Veremos os detalhes sobre essas classes que fazem parte do dia a dia do desenvolvedor Java.
+
+Portanto, se você quer avançar na plataforma Java, criar uma base cada vez mais madura para seus projetos te convido a assistir as próximas aulas deste curso.
+
+O que aprendemos?
+
+- packages servem para organizar o nosso código
+- packages fazem parte do FQN (*Full Qualified Name*) da classe
+- o nome completo da classe (FQN) é composto de: `PACKAGE.NOME_SIMPLES_CLASSE`
+- a definição do package deve ser a primeira declaração no código fonte
+- para facilitar o uso de classes de outros packages podemos importá-los
+- os `import`s ficam logo após da declaração do `package`
+- a nomenclatura padrão é usar o nome do domínio na web ao contrário junto com o nome do projeto, por exemplo:
+
+```undefined
+br.com.caelum.geradornotas
+br.com.alura.gnarus
+br.gov.rj.notas
+de.adidas.lagerCOPIAR CÓDIGO
+```
+
+Uma vez organizado as nossas classes podemos revisar o modificadores de visibilidades que dependem dos pacotes.
+
+
+
+**2 . Todos os modificadores de acesso**
+
+
+

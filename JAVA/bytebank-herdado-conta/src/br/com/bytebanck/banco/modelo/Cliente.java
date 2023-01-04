@@ -1,4 +1,4 @@
-
+package br.com.bytebanck.banco.modelo;
 
 public class Cliente {
 

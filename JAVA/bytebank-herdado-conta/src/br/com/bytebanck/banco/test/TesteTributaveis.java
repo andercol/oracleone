@@ -1,3 +1,5 @@
+package br.com.bytebanck.banco.test;
+import br.com.bytebanck.banco.modelo.*;
 
 public class TesteTributaveis {
 	public static void main(String[] args) {

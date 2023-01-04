@@ -1,14 +1,16 @@
+package br.com.bytebanck.banco.test;
+
+import br.com.bytebanck.banco.modelo.ContaCorrente;
+import br.com.bytebanck.banco.modelo.ContaPoupanca;
+import br.com.bytebanck.banco.modelo.SaldoInsuficienteException;
+
 public class TesteContas {
 
         public static void main(String[] args) throws SaldoInsuficienteException {
 
-        	int a = 3;
-        	int b = a/0;
-        	
-        	ContaCorrente outra = null;
-        	outra.deposita(200.0); 
-        	
-            ContaCorrente cc = new ContaCorrente(111, 111);
+        	//Full Qualified Name FQN
+
+        	ContaCorrente cc = new ContaCorrente(111, 111);
             cc.deposita(100.0);
 
             ContaPoupanca cp = new ContaPoupanca(222, 222);

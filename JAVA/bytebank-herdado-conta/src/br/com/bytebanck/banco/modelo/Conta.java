@@ -1,3 +1,4 @@
+package br.com.bytebanck.banco.modelo;
 
 public abstract class Conta {
 
