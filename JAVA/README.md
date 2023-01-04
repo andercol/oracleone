@@ -1001,3 +1001,47 @@ Nessa aula aprendemos e conhecemos:
 
 
 **5. O pacote java.lang.Object**
+
+O que é?
+
+Visibilidade? Acesso?
+
+Pacote?
+
+```csharp
+public class System { 
+
+    public static ???? out
+
+}
+```
+
+
+
+**System.out.println("Alura")**
+
+System
+
+	- classe, java.lang, acesso publico (public)
+
+out
+
+	- atributo, public, referencia, static
+
+println
+
+- metodo, publico, não static, sobrecarga  (varais versões do mesmo metodo), não joga exceções d tipo checked
+
+
+
+![image-20230104192850321](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230104192850321.png)
+
+
+
+**6. O método toString()**
+
+![image-20230104194623012](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230104194623012.png)
+
+O método `toString()` existe para devolver uma informação sobre o estado do objeto. o método `toString` deve devolver informações sobre o estado do objeto. É útil para a depuração no desenvolvimento.
+
+O método `toString()` existe para ser sobrescrito.  é boa prática sobrescrever o método para dar um significado maior do que a saída padrão desse método.
