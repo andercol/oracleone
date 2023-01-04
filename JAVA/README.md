@@ -494,3 +494,39 @@ Uma vez organizado as nossas classes podemos revisar o modificadores de visibili
 
 
 
+Continuaremos estudando os modificadores de acesso/visibilidade. Por meio dos pacotes conseguimos explicar todos os modificadores e quais são suas diferenças. Se observarmos o seguinte esquema, veremos que está organizado na ordem do "mais visível" ao "menos visível", sendo o `public` visível em todas as áreas e `private` visível somente dentro da classe.
+
+```java
+| Modificadores de Acesso/Visibilidade |
+|--------------------------------------|
+| public                               |
+| protected                            |
+| <<package private>>                  |
+| private                              |
+```
+
+Percebem que essa classe possui o modificador `public`, isso significa, como já sabemos, que ela é visível em todos os espaços dentro e fora do pacote. No código de `TesteSaca`, localizado no pacote `br.com.bytebank.banco.test`, há uma referência a classe `Conta`.
+
+protected = public para as classes filhas
+
+private = visivel só dentro da classe
+
+<<package private>> (default) =  visivel só dentro do pacote
+
+public = visivel em todo lugar
+
+Temos quatro modificadores: `private`, `protected`, `default` e `public`. Onde a ordem do *MAIS* restritivo para o *MENOS* restritivo é: *private, default, protected e public*.
+
+Nessa aula falamos novamente sobre visibilidade e aprendemos:
+
+- existem 3 palavras chaves relacionado com a visibilidade: `private`, `protected`, `public`
+- existem 4 níveis de visibilidade (de menor para maior):
+  - `private` (visível apenas na classe)
+  - *`<<package private>>`* (visível na classe E em qualquer outro membro do mesmo pacote, podendo ser chamado de default)
+  - `protected` (visível na classe E em qualquer outro membro do mesmo pacote E para qualquer filho)
+  - `public` (visível em qualquer pacote)
+- os modificadores podem ser usados na definição da classe, atributo, construtor e método
+
+
+
+**2 . Distribuição do seu código**
