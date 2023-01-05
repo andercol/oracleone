@@ -5,7 +5,7 @@ import br.com.bytebanck.banco.modelo.Conta;
 import br.com.bytebanck.banco.modelo.ContaCorrente;
 import br.com.bytebanck.banco.modelo.ContaPoupanca;
 
-public class Teste {
+public class TesteObject {
 
 	public static void main(String[] args) {
 

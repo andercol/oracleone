@@ -1045,3 +1045,59 @@ println
 O método `toString()` existe para devolver uma informação sobre o estado do objeto. o método `toString` deve devolver informações sobre o estado do objeto. É útil para a depuração no desenvolvimento.
 
 O método `toString()` existe para ser sobrescrito.  é boa prática sobrescrever o método para dar um significado maior do que a saída padrão desse método.
+
+
+
+### Java e java.util: Coleções, Wrappers e Lambda expressions
+
+**01. Conheceno Arrays**
+
+![image-20230105065737524](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230105065737524.png)
+
+
+
+**2.Array de referências**
+
+![image-20230105071854053](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230105071854053.png)
+
+ao criar um array de objetos o valor padrão é null
+
+![image-20230105072518420](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230105072518420.png)
+
+![image-20230105072804387](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230105072804387.png)
+
+Até agora vimos a forma "classica" de criar um objeto array usando a palavra chave `new`, por exemplo:
+
+```cpp
+int[] numeros = new int[6];
+numeros[0] = 1;
+numeros[1] = 2;
+numeros[2] = 3;
+numeros[3] = 4;
+numeros[4] = 5;COPIAR CÓDIGO
+```
+
+No entanto também há uma forma literal. *Literal*, nesse contexto, significa usar valores diretamente, menos burocrático, mais direito. Veja a diferença:
+
+```cpp
+int[] refs = {1,2,3,4,5};COPIAR CÓDIGO
+```
+
+Usamos as chaves `{}` para indicar que se trata de um array e os valores já ficam declarados dentro das chaves.
+
+Nessa aula sobre *Arrays* aprendemos:
+
+- Um array é uma estrutura de dados e serve para guardar elementos (valores primitivos ou referências)
+- Arrays usam colchetes (`[]`) sintaticamente
+- Arrays têm um tamanho fixo!
+- Um array também é um objeto!
+- Arrays são *zero-based* (o primeiro elemento se encontra na posição `0`)
+- Um array é sempre inicializado com os valores padrões.
+- Ao acessar uma posição inválida recebemos a exceção `ArrayIndexOutOfBoundException`
+- Arrays possuem um atributo `length` para saber o tamanho
+- A forma literal de criar uma Array, com o uso de chaves {}.
+
+
+
+
+
