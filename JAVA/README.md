@@ -1056,7 +1056,7 @@ O método `toString()` existe para ser sobrescrito.  é boa prática sobrescreve
 
 
 
-**2.Array de referências**
+**Array de referências**
 
 ![image-20230105071854053](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230105071854053.png)
 
@@ -1099,5 +1099,121 @@ Nessa aula sobre *Arrays* aprendemos:
 
 
 
+**2.Guardando qualquer referência**
+
+Array do tipo Object
+
+![image-20230105073813214](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230105073813214.png)
+
+![image-20230105073913642](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230105073913642.png)
+
+Como nós estamos controlando a execução, sabemos que esta posição do array aponta para o objeto `ContaPoupanca`. `ref` é um objeto do tipo `ContaPoupanca()`, portanto, aponta para o objeto `ContaPoupanca`.
+
+Por isso, queremos informar ao compilador que isso vai funcionar, que nós temos conhecimento de o código irá compilar. Fazemos isso por meio de um **cast** de referências. Transformamos uma referência de um tipo mais genérico, para uma de um tipo mais específico. Isso pode ser chamado também de **type cast**:
+
+![image-20230105074327933](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230105074327933.png)
+
+# Cast explícito e implícito
+
+Já falamos bastante sobre o *Type Cast* que é nada mais do que a conversão de um tipo para outro.
+
+# Cast implícito e explícito de primitivos
+
+Para ser correto, já vimos o cast acontecendo antes mesmo de defini-lo. Temos dois exemplos, o primeiro do mundo de primitivos:
+
+```cpp
+int numero = 3;
+double valor = numero; //cast implícitoCOPIAR CÓDIGO
+```
+
+Repare que colocamos um valor da variável `numero` (tipo `int`) na variável `valor` (tipo `double`), sem usar um cast explícito. Isso funciona? A resposta é sim, pois qualquer inteiro cabe dentro de um double. Por isso o compilador fica quieto e não exige um *cast explicito*, mas nada impede de escrever:
+
+```cpp
+int numero = 3;
+double valor = (double) numero; //cast explícitoCOPIAR CÓDIGO
+```
+
+Agora, o contrário não funciona sem cast, uma vez que um `double` não cabe em um `int`:
+
+```cpp
+double valor = 3.56;
+int numero = (int) valor; //cast explicito é exigido pelo compiladorCOPIAR CÓDIGO
+```
+
+Nesse caso o compilador joga todo valor fracional fora e guarda apenas o valor inteiro.
+
+# Cast implícito e explícito de referências
+
+Nas referências, o mesmo princípio se aplica. Se o cast sempre funciona não é necessário deixá-lo explícito, por exemplo:
+
+```java
+ContaCorrente cc1 = new ContaCorrente(22, 33);
+Conta conta = cc1; //cast implicitoCOPIAR CÓDIGO
+```
+
+Aqui também poderia ser explícito, mas novamente, o compilador não exige pois qualquer `ContaCorrente` é uma `Conta`:
+
+```java
+ContaCorrente cc1 = new ContaCorrente(22, 33);
+Conta conta = (Conta) cc1; //cast explícito mas
+```
+
+# Type cast explícito sempre funciona?
+
+A resposta é não. O cast explicito só funciona se ele for *possível*, mas há casos em que o compilador sabe que um cast é impossível e aí nem compila, nem com *type cast*. Por exemplo:
+
+```java
+Cliente cliente = new Cliente();
+Conta conta = (Conta) cliente; //impossível, não compilaCOPIAR CÓDIGO
+```
+
+Como o cliente não estende a classe `Conta` ou implementa uma interface do tipo `Conta`, é impossível esse *cast* funcionar, pois uma referência do tipo `Conta` jamais pode apontar para um objeto do tipo `Cliente`.
+
+A certificação Java tem muitas dessas perguntas sobre *cast* possível, impossível, explícito e implícito. Se você pretende tirar essa certificação, vale a pena estudar esse assunto com muita calma.
 
 
+
+**3.Entendendo o array String args**
+
+O Eclipse não passou nenhum parâmetro, e por isso nenhum foi exibido. No Eclipse, no botão verde com o símbolo de play, localizado na barra superior, há na direita uma seta menor, apontando para baixo. Clicando nela, na opção "Run Configurations" é possível manipularmos as configurações, ou seja, como a máquina virtual do Java chamará a nossa classe.
+
+![imagem com um círculo verde, com um triangulo branco dentro, indicando uma função de play, ao lado, do lado exterior, há um triângulo menor, preto, que ao ser clicado exibe um menu com demias opções](https://caelum-online-public.s3.amazonaws.com/850-java-util/08/-transcricao-compressed_02.08_004_botao-verde.png)
+
+Na lateral esquerda, há uma lista com todas as *run configurations* que já foram utilizadas para rodar os programas em nossa máquina.
+
+Na parte superior temos diversas abas, uma delas é a `Arguments`, ou seja, argumentos. Nela, podemos inserir os parâmetros:
+
+```undefined
+1 2 oi nico java rocks e eh legalCOPIAR CÓDIGO
+```
+
+Clicamos em "Apply" e "Run". Temos o seguinte resultado no console:
+
+```undefined
+Funcionou!!
+1
+2
+oi
+nico
+java
+rocks
+e
+eh
+legalCOPIAR CÓDIGO
+```
+
+Todos os parâmetros passados.
+
+Agora já vimos os array de strings, bem como array de referências. Adiante, criaremos um array de objetos e falaremos sobre os métodos genéricos da classe `Object`, especialmente o `equals()`.
+
+Nessa aula aprendemos:
+
+- uma array do tipo `Object` pode guardar qualquer tipo de referência
+- quando convertemos uma referência genérica para uma referência mais específica é preciso usar um *type cast*
+- o cast só compila quando é possível, mesmo assim pode falhar na hora de rodar
+- quando o *type cast* falha podemos receber uma `ClassCastException`
+- para receber valores ao chamar o programa Java na linha de comando podemos usar o array `String[]` no método main
+
+
+
+**4.ArrayList de Generics**
