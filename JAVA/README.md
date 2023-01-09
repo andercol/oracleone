@@ -1400,5 +1400,5 @@ Dando continuidade à aula anterior, nesta, criaremos mais um `comparator`.
 
 Previamente, havíamos criado uma classe com o intuito de encapsular somente um método específico, cuja execução efetua a comparação utilizando os parâmetros definidos, e em seguida, fizemos sua implementação. Fizemos isto baseado em um critério numérico, entretanto, nesta aula, veremos como isso pode ser feito com base em um `String`, já que neste caso a comparação envolverá vários caracteres.
 
-Para dar início, nossas quatro contas serão reformuladas e passarão a conter as seguintes informações:
+
 
