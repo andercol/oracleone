@@ -1264,3 +1264,110 @@ Isso é apenas o início sobre esse poderoso pacote `java.util`.
 
 
 **5. Equals e mais listas**
+
+**6. LinkedList**
+
+lista duplamente encadeada 
+
+![image-20230108161340626](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230108161340626.png)
+
+
+
+O pacote `java.util` é de extrema importância no desenvolvimento Java. Sobre ele podemos afirmar que:
+
+`List` é uma *interface*, a `ArrayList` e a `LinkedList` são implementações
+
+Todas as listas garantem a ordem de inserção, as listas garantem a ordem de inserção. Isso significa que ao iterar recebemos os elementos na mesma ordem que eles foram inseridos.
+
+Todas as listas possuem um índice, as listas sempre possuem um índice (podemos acessar o elemento através da posição).
+
+Além disso, existe mais uma característica: lista aceitam elementos duplicados, mas sobre isso falaremos um pouco mais na frente.
+
+
+
+LinkedList e ArrayList são duas implementações diferentes da interface `List`. A `LinkedList` é uma lista duplamente "linkada" e a `ArrayList` representa um array com redimensionamento dinâmico.
+
+Cada uma das implementações tem as suas vantagens e desvantagens (na dúvida escolha `ArrayList`). Relacione as características as implementações:
+
+- A) acesso fácil e performático pelo índice
+- B) inserção e remoção performática em qualquer posição, também no início
+- C) elementos precisam ser copiados quando não há mais capacidade
+- D) acesso mais demorado pelo índice, é preciso pesquisar os elementos
+
+- `ArrayList`: A e C
+- `LinkedList`: B e D
+
+O que aprendemos?
+
+Nessa aula aprendemos:
+
+- como implementar o método `equals` para definir a igualdade
+- que o método `equals` é utilizado pelas listas
+- que existe mais uma lista, a `java.util.LinkedList`
+- a diferença entre `ArrayList` e `LinkedList`
+- a interface `java.util.List` que define os métodos da lista
+
+
+
+**7.A alternativa threadsafe**
+
+![image-20230108162806041](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230108162806041.png)
+
+
+
+![image-20230108163326472](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230108163326472.png)
+
+Nessa aula vimos:
+
+- o `java.util.Vector`, que é uma *ArrayList* thread safe
+- a interface `java.util.Collection` que é a interface de todas as coleções
+- as listas são sequencias que aceitam elementos duplicados
+- os conjuntos (`java.util.Set`) também são coleções, mas não aceitam duplicados nem são listas
+
+
+
+ **8.Autoboxing e Unboxing**
+
+Nos arrays primitivos, cada casa guarda o valor primitivo, enquanto que no array de referência, cada uma armazena a referência que é utilizada para encontrá-lo. Contudo, no mundo das listas, elas só podem ser de referências. Só existem coleções de referências.
+
+Contudo, um problema surgirá disso. Criaremos uma variável que guardará um valor primitivo:
+
+Dentro dela, temos o valor `29`, que é um primitivo. Queremos armazená-lo em uma lista, e daí surge o problema, a lista só é capaz de guardar referências.
+
+Ao chamarmos o método `add()`, veremos que o Eclipse mostra que ele já espera receber uma referência do tipo `Object`, ou seja, se tentarmos adicionar o primitivo idade:
+
+Não deveria funcionar, porque `idade` não é uma referência, logo, não é compatível com o tipo `Object`.
+
+Inicialmente, isto realmente não funcionava, contudo, atualmente o Java cria uma solução sem que seja necessária nenhuma ação por parte do programador.
+
+Para cada primitivo no mundo Java, existe algo que o representa no mundo orientado a objetos. Isso significa que, para cada tipo primitivo, há uma classe que o representa.
+
+Por exemplo, para representar o `int` primitivo, existe a classe `Integer`:
+
+Internamente, o Java transforma o primitivo em um objeto, e armazena a referência no array.
+
+Como havíamos falado, parametrizar o `ArrayList` é uma boa prática para nossas coleções, e para isso utilizamos os *generics*, representados pelos símbolos de menor e maior (`<>`). Desta forma garantimos maior segurança, já que afastamos problemas de cast. Se tentarmos inserir um *generics* de `int`, não funcionará:
+
+Simplesmente porque `int` é um primitivo, não uma referência. Assim, o certo é utilizarmos o `Integer`:
+
+![image-20230109185355993](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230109185355993.png)
+
+![image-20230109185456007](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230109185456007.png)
+
+![image-20230109185530663](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230109185530663.png)
+
+Percebemos que a classe `Integer` aparece riscada, o que indicada que este construtor não deveria mais estar sendo utilizado. Mas então, como construiremos o objeto? Neste caso, o construtor é descontinuado, surge a mensagem de que "*The constructor Int3eger(int) is deprecated*".
+
+Neste caso, para criarmos um objeto, temos que utilizar a classe, com o método estático `valueOf()`, que receberá um primitivo `int`:
+
+Ao utilizarmos o `new` em um objeto, delegamos a criação para um método. Abriremos o método `valueOf()` para visualizarmos sua construção, lembrando que estamos considerando a versão Java 9:
+
+Wrappers = São classes que contém funcionalidades e encapsulam a variável de tipo primitivo!
+
+[Diferença entre int e Integer em Java | Alura](https://www.alura.com.br/artigos/diferenca-entre-int-e-integer-em-java#:~:text=O Java%2C para economizar memória%2C possui um cache,fazer um boxing dos valores e os reutilizar.)
+
+[Integer (Java Platform SE 7 ) (oracle.com)](https://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html)
+
+
+
+ **9.A Classe Number**

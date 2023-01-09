@@ -1,46 +1,34 @@
 package br.com.bytebanck.banco.test.util;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import br.com.bytebanck.banco.modelo.Conta;
-import br.com.bytebanck.banco.modelo.ContaCorrente;
+import java.util.List;
 
 public class Teste {
 
 	public static void main(String[] args) {
 		
-		//Generics <>
-		ArrayList<Conta> lista = new ArrayList<Conta>();
+		int idade = 29; //Integer	
+		//Integer idadeRef = new Integer(29);
+		Integer idadeRef = Integer.valueOf(29);//Autobaxing
 		
-
-		Conta cc  = new ContaCorrente(22, 11);
-		lista.add(cc);
-		Conta cc2  = new ContaCorrente(22, 22);
-		lista.add(cc2);
+		System.out.println(idadeRef.doubleValue());
 		
-		System.out.println(lista.size());
-		Conta ref = lista.get(0);
-		System.out.println(ref.getNumero());
+		System.out.println(Integer.MAX_VALUE);
+		System.out.println(Integer.MIN_VALUE);
 		
-		lista.remove(0);
-		System.out.println("Tamanho: " + lista.size());
+		System.out.println(Integer.SIZE);
+		System.out.println(Integer.BYTES);
 		
-		Conta cc3  = new ContaCorrente(33, 311);
-		lista.add(cc3);
-		Conta cc4  = new ContaCorrente(33, 322);
-		lista.add(cc4);
+		int valor = idadeRef.intValue(); // Unboxing
+		String s = args[0];//"10"
+		//Integer numero = Integer.valueOf(s);
+		int numero = Integer.parseInt(s);
 		
-		for(int i = 0 ; i< lista.size(); i++) {
-			Object oRef = lista.get(i);
-			System.out.println(oRef);
-		}
+		System.out.println(numero);
 		
-		System.out.println("------------");
-		
-		for(Conta conta : lista) {
-			System.out.println(conta);
-		}
+		List<Integer> numeros = new ArrayList<Integer>();		
+		numeros.add(29);
+		numeros.add(Integer.valueOf(29)); //Autoboxing
 	}
 
 }
