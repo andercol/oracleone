@@ -1,4 +1,4 @@
-package br.com.bytebanck.banco.test;
+package br.com.bytebank.banco.test;
 
 public class TesteArrayDePrimitivos {
 

@@ -1,9 +1,9 @@
-package br.com.bytebanck.banco.test.util;
+package br.com.bytebank.banco.test.util;
 
 import java.util.ArrayList;
-import br.com.bytebanck.banco.modelo.Conta;
 
-import br.com.bytebanck.banco.modelo.ContaCorrente;
+import br.com.bytebank.banco.modelo.Conta;
+import br.com.bytebank.banco.modelo.ContaCorrente;
 
 public class TesteArrayListEquals {
 
@@ -27,7 +27,7 @@ public class TesteArrayListEquals {
 		Conta cc3  = new ContaCorrente(22, 22);
 		boolean existe = lista.contains(cc3);
 		
-		System.out.println("Já existe? " + existe);
+		System.out.println("Jï¿½ existe? " + existe);
 		
 		
 		for(Conta conta : lista) {

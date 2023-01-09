@@ -1368,6 +1368,37 @@ Wrappers = São classes que contém funcionalidades e encapsulam a variável de 
 
 [Integer (Java Platform SE 7 ) (oracle.com)](https://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html)
 
-
-
  **9.A Classe Number**
+
+
+
+![image-20230109192521134](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230109192521134.png)
+
+
+
+![image-20230109193114964](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230109193114964.png)
+
+
+
+O que aprendemos?
+
+Nessa aula focamos nas classes *WRAPPERS* e aprendemos que
+
+- para cada primitivo existe uma classe chamada *Wrapper*
+- para guardar um primitivo numa coleção é preciso criar um objeto que embrulha o valor
+- a criação do objeto Wrapper é chamada de *autoboxing*
+- a retirada do valor primitivo do objeto Wrapper é chamada de *unboxing*
+- *autoboxing* e *unboxing* acontecem automaticamente.
+- as classes wrapper possuem vários métodos auxiliares, por exemplo para o parsing
+- todas as classes wrappers que representam um valor numérico possuem a classe `java.lang.Number` como mãe
+
+
+
+ **10.Ordenação de listas**
+
+Dando continuidade à aula anterior, nesta, criaremos mais um `comparator`.
+
+Previamente, havíamos criado uma classe com o intuito de encapsular somente um método específico, cuja execução efetua a comparação utilizando os parâmetros definidos, e em seguida, fizemos sua implementação. Fizemos isto baseado em um critério numérico, entretanto, nesta aula, veremos como isso pode ser feito com base em um `String`, já que neste caso a comparação envolverá vários caracteres.
+
+Para dar início, nossas quatro contas serão reformuladas e passarão a conter as seguintes informações:
+

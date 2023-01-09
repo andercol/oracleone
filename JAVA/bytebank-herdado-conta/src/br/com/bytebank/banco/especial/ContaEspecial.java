@@ -1,6 +1,6 @@
-package br.com.bytebanck.banco.especial;
+package br.com.bytebank.banco.especial;
 
-import br.com.bytebanck.banco.modelo.Conta;
+import br.com.bytebank.banco.modelo.Conta;
 
 public class ContaEspecial extends Conta {
 

@@ -1,4 +1,4 @@
-package br.com.bytebanck.banco.test.util;
+package br.com.bytebank.banco.test.util;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,8 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
-import br.com.bytebanck.banco.modelo.Conta;
-import br.com.bytebanck.banco.modelo.ContaCorrente;
+import br.com.bytebank.banco.modelo.Conta;
+import br.com.bytebank.banco.modelo.ContaCorrente;
 
 public class TesteArrayList {
 

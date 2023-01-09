@@ -1,15 +1,15 @@
-package br.com.bytebanck.banco.modelo;
+package br.com.bytebank.banco.modelo;
 
-public class GuardadorDeContas {
+public class GuardadorDeReferencias {
 
-	private Conta[] referencias;
+	private Object[] referencias;
 	private int posicaoLivre;
-	
-	public GuardadorDeContas() {
+
+	public GuardadorDeReferencias() {
 		this.referencias = new Conta[10];
 		posicaoLivre = 0;
 	}
-	
+
 	public void adiciona(Conta ref) {
 		this.referencias[this.posicaoLivre] = ref;
 		this.posicaoLivre++;
@@ -19,7 +19,7 @@ public class GuardadorDeContas {
 		return this.posicaoLivre;
 	}
 
-	public Conta getReferencia(int i) {
+	public Object getReferencia(int i) {
 		return this.referencias[i];
 	}
 }
