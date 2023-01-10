@@ -1,6 +1,7 @@
 package br.com.bytebank.banco.test.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -48,9 +49,15 @@ public class Teste {
 		}
 		
 		NumeroDaContaComparator comparator = new NumeroDaContaComparator();
-		TitularDaContaComparator titularComparator = new TitularDaContaComparator();
+//		TitularDaContaComparator titularComparator = new TitularDaContaComparator();
 		
-		lista.sort(titularComparator);
+//		lista.sort(titularComparator);
+//		lista.sort(new TitularDaContaComparator());
+		lista.sort(null);// utiliza a ordem natural
+		
+		Collections.sort(lista, new TitularDaContaComparator());
+//		Collections.sort(lista); //ordem natural (precisa implementar interface Comparable)
+//		Collections.reverse(lista);
 		
 		System.out.println("--------------------");
 		
@@ -78,13 +85,18 @@ class NumeroDaContaComparator implements Comparator<Conta>{
 
 	@Override
 	public int compare(Conta c1, Conta c2) {
-		if(c1.getNumero() < c2.getNumero()) {
-			return -1; //retorna qualquer valor negativo.
-		}
-		if(c1.getNumero() > c2.getNumero()) {
-			return 1;
-		}
-		return 0;
+		
+		return Integer.compare(c1.getNumero(), c2.getNumero());
+		
+//		return c1.getNumero() - c2.getNumero();
+		
+//		if(c1.getNumero() < c2.getNumero()) {
+//			return -1; //retorna qualquer valor negativo.
+//		}
+//		if(c1.getNumero() > c2.getNumero()) {
+//			return 1;
+//		}
+//		return 0;
 	}
 	
 }

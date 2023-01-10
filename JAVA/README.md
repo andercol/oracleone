@@ -1402,3 +1402,66 @@ Previamente, havíamos criado uma classe com o intuito de encapsular somente um 
 
 
 
+ **10.A ordem Natural**
+
+No mundo Java existem duas interfaces para definir o critério de ordenação dos elementos de uma lista.
+
+As interfaces são:
+
+java.util.Comparator - Correto, o *comparator* é um parâmetro do método `sort` da lista e da classe `Collections`.
+
+java.lang.Comparable - Correto, para definir a ordem natural dos elementos!
+
+No contexto da aula, o que significa *ordem natural*?
+
+​	É a ordem definida pelo próprio elemento da lista, no nosso exemplo a classe `Conta` define o seu próprio critério de ordenação implementando a interface `java.lang.Comparable`.
+
+Nesse caso não é utilizado nenhum `Comparator`.
+
+----
+
+
+
+Vou te passar um desafio e fazer algumas perguntas relacionadas com listas. Para responder, investigue a documentação oficial da classe `Collections` dentro do pacote `java.util`:
+
+- Como podemos inverter a ordem de uma lista?
+- Como podemos embaralhar todos os elementos de uma lista?
+- Como podemos rotacionar os elementos de uma lista?
+
+Você consegue descobrir os métodos?
+
+Para inverter a ordem de lista você pode usar o método `reverse` da classe `Collections`:
+
+```lua
+Collections.reverse(lista);COPIAR CÓDIGO
+```
+
+Para embaralhar existe o método `shuffle` e para rotacionar tem o método `rotate`:
+
+```scss
+Collections.shuffle(lista);
+Collections.rotate(lista, 5); //rotacionar 5 posicoesCOPIAR CÓDIGO
+```
+
+Vale explorar essa classe!
+
+
+
+Ordenar arrays também não é difícil basta usar o método `sort` da classe `Arrays`. A classe `Arrays` é parecida com `Collections` no sentido que também junta vários métodos utilitários:
+
+Nessa aula fundamental e importante aprendemos que:
+
+- para ordenar uma lista é preciso definir um critério de ordenação
+- há duas formas de definir esse critério
+  - pela interface `Comparator`
+  - pela interface `Comparable` (*ordem natural*)
+- o algoritmo de ordenação já foi implementado
+  - na lista no método `sort`
+  - na classe `Collections` pelo método `sort`
+- a classe `Collections` é uma fachada com vários métodos auxiliares para trabalhar com as coleções, principalmente listas
+
+Respira fundo, pois estamos quase no fim desse curso, no entanto falta ainda aprender (*finalmente!*) as famosas *lambda expressions*. Tá pronto para continuar?
+
+
+
+ **11. Classes Anônimas e Lambdas**
