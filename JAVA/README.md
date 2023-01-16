@@ -1502,3 +1502,372 @@ while(it.hasNext()) {
 }
 ```
 
+**Outros métodos de Collections.**
+
+Além do método `sort()` que vimos neste capítulo, a classe `Collections` também possui muitos outros métodos interessantes. Vamos dar uma olhada em alguns:
+
+### `Collections.reverse()`
+
+O método `reverse()` serve para inverter a ordem de uma lista. As vezes precisamos imprimir uma lista de nomes do último para o primeiro, ou uma lista de `ids` do maior para o menor e é nestas horas que utilizamos o reverse para inverter a ordem natural da lista para nós.
+
+### `Collections.shuffle()`
+
+O método `shuffle()` serve para embaralhar a ordem de uma lista. Por exemplo em um caso de um sistema de sorteio, em que precisamos de uma ordem aleatória na nossa lista, utilizamos o método shuffle para embaralhá-la.
+
+### `Collections.singletonList()`
+
+O método `singletonList()` nos devolve uma lista imutável que contêm um único elemento especificado. Ele é útil quando precisamos passar um único elemento para uma API que só aceita uma Collections daquele elemento.
+
+### `Collections.nCopies()`
+
+O método `nCopies()` nos retorna uma lista imutável com a quantidade escolhida de um determinado elemento. Se temos uma lista específica e precisamos obter uma outra lista imutável , contendo diversas cópias de um destes objetos, utilizamos o método nCopies(). O bom deste método é que mesmo que nós solicitemos uma lista com um número grande, como 10000 objetos, ele na verdade se referencia a apenas um, ocupando assim um pequeno espaço.
+
+Este método também é utilizado para inicializar Listas recém criadas com Null, já que ele pode rapidamente criar diversos objetos, deste modo:
+
+```
+List<Type> list = new ArrayList<Type>(Collections.nCopies(1000, (Type)null));
+```
+
+Estes são apenas alguns exemplos dos diversos métodos da classe **Collections**.
+
+
+
+---------------
+
+## Uma nova coleção, o Set
+
+Vamos aumentar o nosso modelo para começar a trabalhar com alunos, pois um curso tem alunos. Se queremos guardar os alunos, que pertencem a determinado curso, podemos muito bem criar uma lista de alunos na classe `Curso`, assim como temos uma lista de aulas. Mas queremos dar um passo além, mostrar que dentro da biblioteca de coleções há outras opções possíveis, em vez de `List`, que podem nos ajudar em um caso específico.
+
+Se formos abrir a documentação do Java, vocês podem perceber que várias vezes podem aparecer a seguinte imagem:
+
+![img](https://s3.amazonaws.com/caelum-online-public/java-collections/img/05/collections-interfaces.png)
+
+Isso é a herança das interfaces, dentro da API de coleções. Até agora só trabalhamos com a interface `List`. Sim, ela é uma interface, tanto que nunca demos `new` em uma `List`, sempre em um `ArrayList` ou `LinkedList`. O interessante é que existem outras coleções, existe uma interface `Collection`, que é a "mãe" das outras coleções, que veremos daqui para frente.
+
+A coleção que veremos neste capítulo é a segunda coleção mais utilizada, o `Set`, que lembra muito um conjunto matemático. Então, em vez de criarmos uma lista, criaremos um *set*. Para testá-lo, usaremos a classe `TestaAlunos` para testar os futuros alunos do nosso modelo (depois criaremos a classe `Aluno`). Como `Set` é uma interface, não podemos usar o `new`, então vamos dar `new` na implementação mais utilizada dela, o `HashSet`, que iremos entender com o tempo como é o seu funcionamento e quais suas grandes vantagens, comparados com o `ArrayList`:
+
+A ordem da impressão saiu meio estranha. Os alunos não foram impressos na ordem em que foram adicionados. E é essa a primeira característica que podemos perceber quando estamos utilizando um conjunto, um *set*, não temos garantia da ordem em que os elementos vão ficar dentro desse conjunto, desse "saco de objetos". Um conjunto (diferente de uma lista, que representa uma sequência de objetos) é uma "sacola", e lá dentro está cheio de objetos, e você não sabe em que ordem eles estão.
+
+Mas aí você pode pensar então que um conjunto é uma opção pior que uma lista. Não necessariamente. Muitas vezes, e você vai perceber que são mais do que imagina, não é necessário que haja uma ordem entre os elementos da coleção. Podemos simplesmente querer saber quais alunos estão matriculados no curso, não nos importa quem foi o primeiro aluno a se matricular, não temos essa necessidade neste caso. Mas se tivermos essa necessidade, usaríamos uma lista.
+
+E não é por acaso que um conjunto não tenha os métodos de acesso que utilizam a ordem do elemento, como o método `get`, por exemplo. Claro, como não temos garantia da ordem dos elementos, não podemos invocar o `get` pedindo o quarto elemento, já que como não existe ordem, não existe esse quarto elemento.
+
+Mas e para acessar esses elementos? Podemos fazer um `foreach`:
+
+Com isso, imprimimos cada uma das `String`s que estão nesse conjunto.
+
+## Vantagens do uso do HashSet
+
+Por enquanto nós "perdemos" a ordem, se compararmos o conjunto com a lista. Então quais são as vantagens?
+
+A primeira vantagem é que ele não aceita elementos repetidos. Podemos testar isso adicionando duas `String`s iguais e depois imprimi-las. Faça o teste:
+
+```csharp
+import java.util.*;
+
+public class TestaAlunos {
+
+    public static void main(String[] args) {
+
+        Set<String> alunos = new HashSet<>();
+        alunos.add("Rodrigo Turini");
+        alunos.add("Alberto Souza");
+        alunos.add("Nico Steppat");
+        alunos.add("Nico Steppat"); // outro Nico Steppat, exatamente igual ao anterior
+
+        System.out.println(alunos);    
+    }
+}COPIAR CÓDIGO
+```
+
+**Todos** os `Set`s do Java garantem para nós que só haverá um objeto dentro do conjunto, nenhum outro igual. Ele ignorará todos os outros elementos iguais, isso pode ser comprovado se imprimirmos o tamanho do conjunto, invocando o método `size`. No caso do exemplo acima, o resultado será **3**.
+
+Mas a grande vantagem de se utilizar o conjunto é a velocidade de performance, quando utilizamos métodos que procuram objetos dentro de uma coleção (por exemplo, o método `contains`).
+
+Toda coleção possui o método `contains`, isso porque esse método é da interface "mãe" das coleções, a `Collection`, logo uma lista também possui esse método.
+
+O `contains` retorna um booleano dizendo se a coleção possui ou não determinado objeto que passamos para o método. Exemplo:
+
+```java
+boolean pauloEstaMatriculado = alunos.contains("Paulo Silveira");COPIAR CÓDIGO
+```
+
+E esse método é extremamente rápido quando executado em um `HashSet`. Muito mais rápido que em uma lista. Por quê?
+
+Baseado no exemplo, o `contains` de uma lista faz uma busca linear, ou seja, busca elemento por elemento, para verificar que "Paulo Silveira" não se encontra no meio dos objetos da coleção. Já o `HashSet` utiliza uma **tabela de espalhamento** para tentar fazer a busca em tempo constante, tornando a busca mais rápida.
+
+Em um conjunto com 10 mil, 100 mil objetos, realizando buscas frequentes, a diferença do tempo de execução entre o `HashSet` e uma lista é notável.
+
+## Quando usar cada um?
+
+Essa questão varia de acordo com a necessidade de cada um, o que é interessante é que podemos ser ainda mais genéricos quando declaramos as nossas coleções. `HashSet` implementa `Set`, que por sua vez implementa `Collection`, então podemos declarar um `HashSet` da seguinte forma:
+
+```javascript
+Collection<String> alunos = new HashSet<>();COPIAR CÓDIGO
+```
+
+Com isso, o nosso código continua compilando, já que a maioria dos métodos que vimos até aqui pertencem à interface `Collection`, assim o nosso código fica mais flexível.
+
+Mas podemos perceber que ainda não podemos utilizar métodos que envolvam a ordem dos elementos. Para isso, podemos utilizar um recurso que utilizamos no capítulo passado, criar uma lista, passando a coleção por parâmetro para o construtor:
+
+```javascript
+List<String> alunosEmLista = new ArrayList<>(alunos);COPIAR CÓDIGO
+```
+
+Agora conseguimos ordenar essa lista, buscar pelo índice, e assim por diante. É comum utilizarmos várias coleções ao mesmo tempo, que compartilham os elementos entre si, para trabalharmos com eles da melhor forma.
+
+### O que aprendemos neste capítulo:
+
+- Uma nova coleção: `Set`.
+- A implementação `HashSet`.
+- Vantagens e desvantagens do `Set`.
+- Mais sobre a interface `Collection`.
+
+
+
+**Velocidade de busca das listas e conjuntos**
+
+Crie a classe `TestaPerformance`, com um método `main` e um código que insere 50 mil números em uma `ArrayList` e os pesquisa. Vamos usar o método `currentTimeMillis()`, de `System`, para cronometrar o tempo gasto com a adição e pesquisa dos elementos:
+
+```csharp
+public class TestaPerformance {
+
+    public static void main(String[] args) {
+
+        Collection<Integer> numeros = new ArrayList<Integer>();
+
+        long inicio = System.currentTimeMillis();
+
+        for (int i = 1; i <= 50000; i++) {
+            numeros.add(i);
+        }
+
+        for (Integer numero : numeros) {
+            numeros.contains(numero);
+        }
+
+        long fim = System.currentTimeMillis();
+
+        long tempoDeExecucao = fim - inicio;
+
+        System.out.println("Tempo gasto: " + tempoDeExecucao);
+
+    }
+
+}COPIAR CÓDIGO
+```
+
+Troque o `ArrayList` por `HashSet` e verifique o tempo que vai demorar:
+
+```xml
+Collection<Integer> numeros = new HashSet<>();COPIAR CÓDIGO
+```
+
+O que é lento? A inserção dos 50 mil elementos ou as 50 mil buscas? Descubra computando o tempo gasto em cada `for` separadamente.
+
+Se você passar de 50 mil para um número maior, como 100 mil, verá que isso inviabiliza por completo o uso de uma `List` em casos que quisermos utilizá-la essencialmente para pesquisas.
+
+Crie a classe `TestaPerformance`, com um método `main` e um código que insere 50 mil números em uma `ArrayList` e os pesquisa. Vamos usar o método `currentTimeMillis()`, de `System`, para cronometrar o tempo gasto com a adição e pesquisa dos elementos:
+
+```csharp
+public class TestaPerformance {
+
+    public static void main(String[] args) {
+
+        Collection<Integer> numeros = new ArrayList<Integer>();
+
+        long inicio = System.currentTimeMillis();
+
+        for (int i = 1; i <= 50000; i++) {
+            numeros.add(i);
+        }
+
+        for (Integer numero : numeros) {
+            numeros.contains(numero);
+        }
+
+        long fim = System.currentTimeMillis();
+
+        long tempoDeExecucao = fim - inicio;
+
+        System.out.println("Tempo gasto: " + tempoDeExecucao);
+
+    }
+
+}COPIAR CÓDIGO
+```
+
+Troque o `ArrayList` por `HashSet` e verifique o tempo que vai demorar:
+
+```xml
+Collection<Integer> numeros = new HashSet<>();COPIAR CÓDIGO
+```
+
+O que é lento? A inserção dos 50 mil elementos ou as 50 mil buscas? Descubra computando o tempo gasto em cada `for` separadamente.
+
+Se você passar de 50 mil para um número maior, como 100 mil, verá que isso inviabiliza por completo o uso de uma `List` em casos que quisermos utilizá-la essencialmente para pesquisas.
+
+**Para saber mais: Coleções threadsafe**
+
+**Para saber mais: Coleções threadsafe**
+
+
+
+Uma das características mais interessantes de JVM é que ela sabe trabalhar em paralelo. Internamente isso é feito por meio de **Threads** que funcionam como pequenos processos dentro da JVM.
+
+O problema é que as coleções que estamos usando até agora não foram feitas para serem manipuladas em paralelo. No entanto, nada impede que usemos um método da classe `Collections` para transformar uma coleção comum em uma coleção para threads. É justamente isso que o método faz, retorna um nova coleção que pode ser compartilhada entre threads sem perigos.
+
+
+
+**Equals e hashcode**
+
+Agora, queremos usufruir da grande vantagem dos `Set`s: **a velocidade**. Queremos perguntar para coleção, por exemplo, se determinado aluno está matriculado:
+
+```csharp
+System.out.println("O aluno " + a1.getNome() + " está matriculado?");
+System.out.println(javaColecoes.estaMatriculado(a1));COPIAR CÓDIGO
+```
+
+Novamente, usaremos o TDD para criar o método automaticamente, basta usar o comando `CTRL + 1` e o Eclipse criará para você. Porém precisamos alterar o retorno para `boolean`. Já dentro do método, utilizaremos-nos de um outro método que está presente em todas as classes que implementam a interface `Collection`, o `contains`. Com isso, vamos delegar a funcionalidade do método `estaMatriculado` para um já existente:
+
+```typescript
+public boolean estaMatriculado(Aluno aluno) {
+    return this.alunos.contains(aluno);
+}COPIAR CÓDIGO
+```
+
+Agora, o `contains` utilizará a estrutura bem implementada da **tabela de espalhamento**, e irá retornar rapidamente `true` ou `false` para nós. Testando... Funciona! O aluno inserido algumas linhas antes, `a1`, está matriculado no curso. Se comentarmos a linha de inserção, o método nos retornará `false`.
+
+## O método equals
+
+Porém, existe um grande problema, bastante comum ao trabalhar com conjuntos, o problema do `equals`. Imagine que estamos nos utilizando de um *web service* e ele possui um formulário perguntando quem estamos procurando. Se vamos digitar no formulário, o seu retorno será uma String com o nome do aluno procurado:
+
+```java
+String alunoProcurado = "Rodrigo Turini";COPIAR CÓDIGO
+```
+
+Não podemos procurá-lo com o nosso método anterior, pois o método `estaMatriculado` recebe um objeto do tipo Aluno como parâmetro. Então vamos criar um objeto exatamente igual ao aluno `a1` criado anteriormente, e passá-lo na função, para saber se ele está ou não dentro do curso:
+
+```csharp
+Aluno turini = new Aluno("Rodrigo Turini", 34672);
+System.out.println("E esse Turini, está matriculado?");
+System.out.println(javaColecoes.estaMatriculado(turini));COPIAR CÓDIGO
+```
+
+Testando e... Deu `false`! Esse `turini` não é o mesmo aluno que adicionamos no curso como `a1`. Mas isso já sabíamos da orientação a objetos, se dermos um `new`, mesmo que o objeto contenha tudo igual, ele não fará referência ao primeiro, e portanto, são diferentes. Você pode testar executando o exemplo abaixo:
+
+```csharp
+public class TestaCursoComAluno {
+
+    public static void main(String[] args) {
+
+        Aluno aluno = new Aluno("Douglas Quintanilha", 11824763);
+        Aluno alunoQueVeioDoFormulario = new Aluno("Douglas Quintanilha", 11824763);
+
+        System.out.println("O aluno e igual ao aluno que veio do formulario?");
+        System.out.println(aluno == alunoQueVeioDoFormulario);
+    }
+}
+
+public class Aluno {
+
+    private String nome;
+    private int numeroMatricula;
+
+    public Aluno(String nome, int numeroMatricula) {
+        this.nome = nome;
+        this.numeroMatricula = numeroMatricula;
+    }
+}COPIAR CÓDIGO
+```
+
+Olhando a documentação da interface `Collection` e indo no método `contains`, veremos que ele utiliza o método `equals`. Sabemos que a definição do `equals` usada pelo Java nem sempre é a que queremos. Usando nosso caso de alunos, sabemos que `a1.equals(turini) == true`, porém isso não é verdadeiro para o Java.
+
+Por isso, precisamos reescrever o método `equals` na nossa classe `Aluno`. Para nós, dois alunos são iguais se ambos tiverem o mesmo nome, então vamos ao trabalho:
+
+```typescript
+@Override
+public boolean equals(Object obj) {
+    Aluno outroAluno = (Aluno) obj;
+    return this.nome.equals(outroAluno.nome);
+}COPIAR CÓDIGO
+```
+
+Lembrando que é preciso ter cuidado nos casos em que o nome seja `null`. Podemos nos defender disso colocando uma condição no construtor em que só seja possível criar o objeto se o nome não for `null`:
+
+```csharp
+public Aluno(String nome, int numeroMatricula) {
+    if (nome == null) {
+        throw new NullPointerException("Nome não pode ser nulo");
+    }
+    this.nome = nome;
+    this.numeroMatricula = numeroMatricula;
+}COPIAR CÓDIGO
+```
+
+E assim garantimos que no método `equals`, não teremos problemas com `NullPointerException`. Vamos testar agora e ver se "a1 é equals ao Turini":
+
+```csharp
+System.out.println("O a1 é equals ao Turini?");
+System.out.println(a1.equals(turini));COPIAR CÓDIGO
+```
+
+E sim, é `true`! Porém, nossa comparação de cima ainda não funciona:
+
+```csharp
+Aluno turini = new Aluno("Rodrigo Turini", 34672);
+System.out.println("E esse Turini, está matriculado?");
+System.out.println(javaColecoes.estaMatriculado(turini));COPIAR CÓDIGO
+```
+
+Temos `false` como resultado. No entanto, se mudamos o `equals`, por que ele continua dizendo que `turini` não está matriculado? Ao comparar `turini` com `a1`, o resultado é `true` (como visto no nosso teste), porém o `estaMatriculado` nos retorna `false`.
+
+Sempre que reescrever o método Equals é necessário reescrever o método hashCode.
+
+## O método hashCode
+
+Vamos à explicação: a estrutura `Set` usa uma **tabela de espalhamento** para realizar mais rapidamente suas buscas. Imagine que cada vez que você adiciona algo dentro do seu `Set` para espalhar os objetos, um número mágico é gerado e todos os objetos que o tenham são agrupados. E ao buscar, em vez de comparar o objeto com todos os outros objetos contidos dentro do `Set` (isso daria muitas comparações), ele gera novamente o mesmo número mágico, e compara apenas com aqueles que também tiveram como resultado esse número. Ou seja, ele compara apenas dentro do grupo de semelhança. No caso da matricula não reconhecida, o aluno `a1` estava num grupo diferente de `turini`, e por isso o método `contains` não conseguia encontrá-lo.
+
+Como é gerado esse número mágico? Utilizando o método `hashCode`, por isso precisamos sobrescrevê-lo, mudando-o para quando criarmos um objeto `Aluno` com o mesmo nome, que esses objetos gerem o mesmo `hashCode` e portanto, fiquem no mesmo grupo. Podemos por exemplo pegar o primeiro caractere do nome. Dessa maneira, estaremos dividindo os grupos em grupos de alunos que começam com **A, B, C, D, ...**, e `Rodrigo Turini` tanto em `a1` quanto em `turini` estarão no grupo **R**:
+
+```csharp
+@Override
+public int hashCode(){
+    return this.nome.charAt(0);
+}COPIAR CÓDIGO
+```
+
+Testando, vemos que funciona! Mas temos outro probleminha... O espalhamento é feito para que se tenha o menor número possível de objetos dentro de um grupo, e separando alfabeticamente como estamos fazendo, não é a maneira mais eficiente. Entrando na classe `String` do Java, vemos que ela tem o método `hashCode` implementado, e ele já faz uma conta bem difícil, para que haja o melhor espalhamento e assim, a busca seja bastante eficiente. Então, podemos fazer com que o nosso `hashCode` devolva o `hashCode` da `String` `nome`:
+
+```csharp
+@Override
+public int hashCode(){
+    return this.nome.hashCode();
+}COPIAR CÓDIGO
+```
+
+Se rodarmos o código novamente, temos `true` em todos os testes. Considere a seguinte **regra**: caso você sobrescreva o método `equals`, obrigatoriamente deverá sobrescrever o método `hashCode`.
+
+### O que aprendemos neste capítulo:
+
+- Implementação das nossas próprias regras de comparação entre objetos de uma mesma classe.
+- Sobrescrita do método `equals`.
+- A necessidade de sobrescrever o método `hashCode` quando o `equals` for sobrescrito.
+
+**Para saber mais: O contrato do método equals**
+
+Nossa implementação do método `equals` é funcional, porém em alguns casos mais específicos podemos ter alguns problemas. Existe um contrato mais avançado que devemos seguir para implementar um método `equals` eficiente:
+
+https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-
+
+Por conta dessas propriedades uma implementação sofisticada do método `equals` pode ser bem trabalhosa, por essa razão que as IDE's fornecem recursos que implementam esse método para nós.
+
+No Eclipse você pode pressionar **CTRL + 3** e digitar **equals**.
+
+![img](https://s3.amazonaws.com/caelum-online-public/java-collections/img/07/equals1.png)
+
+Podemos ainda escolher os atributos que queremos utilizar na comparação:
+
+![img](https://s3.amazonaws.com/caelum-online-public/java-collections/img/07/equals2.png)
+
+Sendo assim, utilize esse recurso para implementar os métodos *equals* e *hashCode* da classe `Aluno`.
