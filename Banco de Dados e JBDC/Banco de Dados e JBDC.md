@@ -18,7 +18,7 @@ Caso já conheça a linguagem SQL e gostaria de relembrar alguns conceitos, esse
 
 #### História do SQL
 
-Vamos iniciar contando a história da linguagem SQL, para compreendermos quais foram os motivos, como surgiu e o seu histórico.
+Vamos iniciar contando a história da linguagem SQL, para compreendermos quais foram os motivos, como surgiu e o seu histórico. 
 
 A linguagem SQL foi desenvolvida no começo dos anos 70, na cidade de São José, Califórnia, em um projeto chamado *System R* da IBM, do inglês *International Business Machines*, cujo objetivo era comprovar a viabilidade da implementação de um modelo relacional, que um estudioso chamado Codd estava propondo.
 
@@ -80,4 +80,4 @@ Comandos:
 * DDL
 * DML
 * DCL
-* 
+
