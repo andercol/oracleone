@@ -1976,3 +1976,292 @@ Essa classe é muito antiga e se parece com o `ArrayList`, inclusive ela impleme
 - As implementações `LinkedHashSet` e `TreeSet`.
 - Iteração de uma coleção utilizando o `Iterator`.
 - A antiga classe `Vector`.
+
+
+
+**HashSet é poderoso, mas se eu precisar de acesso ordenado?**
+
+No capítulo anterior, aprendemos a lidar com conjuntos e vimos as vantagens de usarmos um `HashSet`. Além de não aceitar elementos duplicados, característica dos conjuntos, podemos realizar buscas extremamente rápidas. Ter um código que processe rapidamente é algo que alegra não apenas o desenvolvedor, mas os usuários que esperam menos os resultados.
+
+Contudo, o HashSet, por ser um conjunto, não possui uma ordem previsível. Como assim? Imagine uma sacola de bingo. Dentro dela adicionamos várias bolas numeradas que não se repetem. Se adicionarmos primeiro a bola 11, não quer dizer que quando acessarmos o primeiro elemento do conjunto será a bola 11. Pode ser 15, 34 ou 40. Veja que essa característica do conjunto de não termos uma ordem previsível pode limitar o uso do poderoso HashSet em situações que desejamos maior performance, mas precisamos ter um acesso ordenado e previsível.
+
+Mas nem tudo está perdido. No Collection Framework há uma estrutura de dados que usa o poder do hash e que podemos acessar os elementos de maneira previsível, isto é, se adicionarmos os elementos A, B e C teremos certeza que A é o primeiro, B é o segundo e por aí vai.
+
+O LinkedHashSet nos dá a performance de um HashSet mas com acesso previsível e ordenado.
+
+
+
+No decorrer do curso, vocês podem ter tido a seguinte dúvida: O que é uma `Collection` para o Java?
+
+Uma coleção é todo mundo que implementa a interface `Collection`. É ela que possui os métodos que utilizamos durante o treinamento, como `add`, `contains`, `remove` e `size`. Esses quatro métodos são os principais dessa interface e foram os que mais utilizamos.
+
+Todas as classes que forem "filhas", ou implementação de `Collection`. Quais *collections* que vimos até agora? Duas interfaces "filhas", `List` e `Set`. Mas vimos outras implementações também, em especial o `ArrayList` e o `HashSet`.
+
+Então uma `Collection` é uma interface que define métodos e trabalha com uma coleção, com um punhado de objetos. E existem várias formas de trabalhar com um punhado de objetos, como uma forma que pode ter objetos repetidos e estarão em uma sequência de ordem que nós definirmos, que é a `List`, ou onde não pode haver objetos repetidos e que não sabemos, independentemente da ordem dos objetos, que é o `Set`, entre outras formas.
+
+Qual vamos usar? Depende da necessidade de cada um.
+
+Para demonstrar que varia para cada caso. Para representar as aulas da Alura, fazia sentido usarmos uma lista para termos uma ordem, saber qual viria antes ou depois. Já para os alunos, não precisaremos saber qual virá antes ou depois, e nem poderemos ter elementos repetidos, então utilizamos um conjunto, um `Set`.
+
+Mas se você ainda não sabe qual *collection* utilizar, pode-se declarar o atributo como `Collection`. Vamos criar uma classe chamada `QualColecaoUsar`, para demonstrar isso:
+
+```typescript
+public class QualColecaoUsar {
+
+    public static void main(String[] args) {
+
+        Collection<Aluno> alunos;    
+    }
+}COPIAR CÓDIGO
+```
+
+Ainda não demos `new`, porque ainda não sabemos em quem queremos dar `new`. Em quem podemos dar `new`? Em todas as implementações que vimos! Pois todos são "filhos", "netos", e assim por diante, de `Collection`:
+
+```typescript
+public class QualColecaoUsar {
+
+    public static void main(String[] args) {
+
+        Collection<Aluno> alunos = new ArrayList<>();    
+    }
+}COPIAR CÓDIGO
+```
+
+Com isso, nós conseguimos ainda utilizar os métodos `add`, `remove`, `size`... Mas não conseguimos utilizar o `get`, porque ele não pertence à interface `Collection`. Entra aí a questão da necessidade. Se precisamos do método `get`, não faz muito sentido utilizarmos a interface `Collection` e sim a interface `List`.
+
+E isso vai ficando um pouco mais claro com o tempo, no começo queremos utilizar `ArrayList` em tudo e com o tempo podemos ver que em alguns casos poderíamos ter utilizado o `HashSet`, que possui a vantagem de performance quando pesquisarmos elementos nele. E se não sabe ainda o que quer, declare simplesmente como `Collection`, conforme suas necessidades você vai definindo qual interface utilizar.
+
+Mesmo na classe utilitária `Collections`, alguns dos seus métodos recebem `Collection` por parâmetro, para ser o mais genérico possível.
+
+Você já ouviu muito sobre essas duas interfaces, a (List) e a (Set), mas qual é a diferença mesmo?
+
+`List` é uma sequência e aceita elementos duplicados. `Set` não aceita duplicados e não define ordem.
+
+Como um programador deve proceder não sabendo qual das implementações de `Collection` servirá melhor para o nosso sistema? Deve declarar como `Collection<Aluno> alunos` pois assim poderá mudar mais facilmente de implementação.
+
+Provavelmente, caso a modelagem do sistema ainda não esteja bem definida, o desenvolvedor irá utilizar a interface `Collection<E>`. Dessa maneira, terá acesso aos métodos básicos de todas as implementações, como `size()`, `add()`, `remove()` e `contains()`. Conforme for sentindo necessidade em algo específico, o desenvolvedor fará poucas mudanças em seu código.
+
+Caso sinta necessidade de fazer uma requisição a um elemento específico através da sua posição, trocará de `Collection<E>` para `List<E>`. Caso perceba que ordem não importa, porém é necessária uma busca bem rápida (e sem repetições), um `Set<E>` é mais apropriado.
+
+Enquanto não sentir essa necessidade, provavelmente a `Collection<E>` será a melhor escolha.
+
+### *Você precisa guardar um monte de alunos em uma coleção e precisa decidir qual implementação irá utilizar.*
+
+Sabemos que:
+
+- a coleção deve guardar os alunos ordenados pelo número de matrícula
+- a coleção não pode ter elementos repetidos
+
+R: A implementação `TreeSet` já ordena os seus elementos na hora da inserção. Qual é o critério da ordenação depende e pode ser definido através de um `Comparator`.
+
+### O que aprendemos neste capítulo:
+
+- Declaração de atributos utilizando a interface `Collection`.
+
+
+
+### **Mapas**
+
+Que tal fazermos uma busca por alunos matriculados num curso? Vamos criar uma nova classe chamada `TestaBuscaAlunosNoCurso`, e aproveitar um pouco da classe `TestaCursoComAluno`, onde já temos o curso `javaColecoes`, aulas e alunos matriculados:
+
+```java
+public class TestaBuscaAlunosNoCurso {
+
+    public static void main(String[] args) {
+
+        Curso javaColecoes = new Curso("Dominando as coleções do Java",
+                "Paulo Silveira");
+
+        javaColecoes.adiciona(new Aula("Trabalhando com ArrayList", 21));
+        javaColecoes.adiciona(new Aula("Criando uma Aula", 20));
+        javaColecoes.adiciona(new Aula("Modelando com coleções", 24));
+
+        Aluno a1 = new Aluno("Rodrigo Turini", 34672);
+        Aluno a2 = new Aluno("Guilherme Silveira", 5617);
+        Aluno a3 = new Aluno("Mauricio Aniche", 17645);
+
+        javaColecoes.matricula(a1);
+        javaColecoes.matricula(a2);
+        javaColecoes.matricula(a3);
+    }
+}COPIAR CÓDIGO
+```
+
+Dentro de `Curso` criamos um método que verifica se o aluno está matriculado, mas agora queremos saber algo diferente, queremos buscar um aluno dentro do curso utilizando o seu número de matrícula. Podemos fazer TDD:
+
+```csharp
+System.out.println("Quem é o aluno com matricula 5617?");
+Aluno aluno = javaColecoes.buscaMatriculado(5617);
+System.out.println("Aluno: " + aluno);COPIAR CÓDIGO
+```
+
+Como sempre, damos `CTRL+1` e pedimos para o Eclipse criar a estrutura do método para nós. Como podemos descobrir se o Aluno com matrícula **5617** está no curso? De um jeito simples, basta fazermos um `foreach` em `alunos` e testar se o número é igual, correto? E caso não achemos, jogamos uma *exception* já existente do Java:
+
+```cpp
+public Aluno buscaMatriculado(int numero) {
+    for (Aluno aluno : alunos) {
+        if (aluno.getNumeroMatricula() == numero) {
+            return aluno;
+        }
+    }
+    throw new NoSuchElementException("Matricula " + numero
+            + " não encontrada");
+}COPIAR CÓDIGO
+```
+
+Vamos testar e ver se funciona. Funciona conforme o esperado!
+
+## Uma nova estrutura
+
+Uma pergunta: com que frequência faremos essa busca no curso? Frequentemente, correto? Além disso, o número de alunos pode ficar muito grande e a nossa busca será muito custosa.
+
+Interessante vermos que temos a estrutura de dados eficiente para fazer associações, ou seja, dado um número (a matrícula), teremos um aluno associado correspondente, como se fosse uma tabela. O nome da estrutura que faz muito bem isso é o **Map**. Vale ressaltar que `Map` não é uma implementação de `Collection`, ele é uma interface por si só.
+
+Como dito antes, o `Map` é muito bom em fazer associações. No nosso caso, queremos fazer uma associação entre um número inteiro (`Integer`) e um aluno (`Aluno`). Como podemos fazê-la, então? Devemos fazer isso dentro da nossa classe `Curso`, pois nossa intenção inicial era exatamente isso: buscar um aluno dentro de um curso. A implementação de `Map` mais usada é o `HashMap`:
+
+```swift
+public class Curso{
+
+    private Map<Integer, Aluno> matriculaParaAluno = new HashMap<>();
+    // restante do código
+}COPIAR CÓDIGO
+```
+
+Ao fazer isso, teremos um mapa completamente vazio. Então, podemos modificar o método `matricula` para que, além de adicionar o aluno dentro do `Set`, ele também relacione o número de matricula com o aluno:
+
+```csharp
+public void matricula(Aluno aluno) {
+    // adiciona no Set de alunos
+    this.alunos.add(aluno);
+    // cria a relação no Map
+    this.matriculaParaAluno.put(aluno.getNumeroMatricula(), aluno);
+}COPIAR CÓDIGO
+```
+
+Estamos fazendo algo parecido com uma tabela Excel. Temos duas colunas **aluno** e **matricula** e vamos adicionando (***put\***) a chave matricula e o valor aluno. E o que isso vai nos ajudar? Bem, podemos mudar o nosso `buscaMatriculado()` e deixá-lo mais simples:
+
+```csharp
+public Aluno buscaMatriculado(int numero) {
+    return this.matriculaParaAluno.get(numero);
+}COPIAR CÓDIGO
+```
+
+## Otimizado
+
+Muito melhor, não? Em vez de utilizarmos um `for` que poderia demorar bastante dependendo da quantidade de alunos, basta passarmos uma **chave** (que definimos ao criar o Mapa como sendo um `Integer`) e ele irá nos retornar o aluno relacionado. E ainda ganharemos em performance, pois o algoritmo implementado dentro de `HashMap` é bastante otimizado para velocidade (usa o mesmo princípio da **tabela de espalhamento**).
+
+E se testarmos um aluno inexistente? Passando para o método, por exemplo, uma matrícula **5618**? O retorno será `null`. Esse é o padrão implementado, caso consultemos a documentação, veremos que o método `get` retorna duas opções: o valor relacionado ou `null`. Isso nos ajuda por não ter que lançar uma *exception* avisando que determinada matrícula não foi encontrada.
+
+Você sempre pode olhar a documentação e estudar a quantidade enorme de métodos que o `HashMap` já implementou para nós.
+
+Lembrando que a chave que definimos na declaração do `Map` tem que ser única. Podemos testar adicionando um aluno com o mesmo número de matrícula que outro, e tentando buscar esse número de matrícula:
+
+```java
+Aluno a2 = new Aluno("Guilherme Silveira", 5617);
+Aluno a4 = new Aluno("Paulo Silveira", 5617);
+
+javaColecoes.matricula(a2);
+javaColecoes.matricula(a4);
+
+System.out.println("Quem é o aluno com matricula 5617?");
+Aluno aluno = javaColecoes.buscaMatriculado(5617);
+System.out.println("Aluno: " + aluno);COPIAR CÓDIGO
+```
+
+Veremos que apenas o último aluno adicionado é apresentado. Isso acontece porque ao adicionarmos um aluno com o mesmo número de matrícula que outro já existente, o mais antigo é esquecido pelo `Map` e o novo se torna o **valor** relacionado àquela matrícula.
+
+## Outras Implementações
+
+O `HashMap`, como foi dito anteriormente, é uma das implementações mais usadas de `Map`. Mas temos outras como o `LinkedHashMap`, bastante parecido com o `LinkedHashSet`, que guarda a ordem de inserção. Ou seja, se fôssemos imprimir o `LinkedHashMap`, a impressão apareceria na ordem em que foi inserida.
+
+Outro exemplo de `Map`, porém muito antigo, é o `HashTable`, uma implementação bem antiga de `Map`, pouco usada mas que é uma *thread safe*. Ou seja, é seguro usá-lo em um programa que tenha programação concorrente. Porém, comumente, a pessoa que necessita de um `Map` *thread safe* estudará mais sobre `threads`(inclusive temos um curso [aqui](https://cursos.alura.com.br/course/threads-java-1) no Alura) e utilizará `HashMap`.
+
+Pessoal, o que aprendemos neste curso foram as principais Coleções do Java!
+
+É muito importante lembrar de **pesquisar** no **Javadoc** do `java.util`, pois existe muita coisa já implementada e vários códigos reutilizáveis: não reinvente a roda!
+
+
+
+Vimos que para adicionar um elemento em uma lista ou conjunto, utilizamos o método `add`. Mas por não implementar a interface `Collection`, `Map` não possui este método `add`. Qual método utilizamos para adicionar um elemento em um `Map`?
+
+R: put - O método utilizado para adicionar um elemento em um `Map` é o método `put`. Ele recebe dois parâmetros, a **chave** e o **valor**. Os tipos desses parâmetros dependem do que definimos na hora da instância do objeto. Por exemplo, abaixo criamos um `Map` que recebe como chave a matrícula do aluno e como valor o seu nome:
+
+```javascript
+Map<Integer, String> matriculaParaAluno = new HashMap<>();
+matriculaParaAluno.put(123456, "Leonardo Cordeiro");COPIAR CÓDIGO
+```
+
+Então no `put`, nós temos que receber como parâmetro um inteiro, que representa a matrícula, e uma `String`, que representa o nome do aluno.
+
+ *Garantindo a ordem de inserção de um mapa*
+
+Assim como o `HashSet`, o `HashMap` não mantém a ordem de inserção dos seus elementos. Mas há uma implementação de `Map` que garante essa ordem de inserção para nós, que implementação é essa?
+
+R: O `LinkedHashMap` continua nos dando a performance de um `HashMap`, mas com acesso previsível e ordenado, seguindo a inserção dos seus elementos.
+
+
+
+#### **Criando o mapa de alunos**
+
+Como visto no vídeo, crie o `Map` **matriculaParaAluno**, que é uma instância de `HashMap`, que irá associar o aluno com a sua matrícula. Mas como garantiremos que essa associação será realizada, que a matrícula e o seu aluno serão inseridos no mapa? Precisamos que essa inserção seja feita na hora em que o aluno for matriculado!
+
+Crie também o método `buscaMatriculado`, que recebe o número de matrícula como parâmetro. Dentro deste método, pegue e retorne o aluno que tenha a matrícula passada por parâmetro (**Dica:** Lembre-se que já existe um método de `Map` que faz isso para nós, então **delegue** essa funcionalidade para ele).
+
+Para associar uma matrícula com o seu aluno, sempre que o mesmo for matriculado, basta fazermos a associação dentro do método `matricula`, pois é ele que chamamos sempre que queremos matricular um aluno. Dentro do método, adicionamos o aluno associado com a sua matrícula no mapa, invocando o método `put`:
+
+```csharp
+public void matricula(Aluno aluno) {
+    // adiciona no Set de alunos
+    this.alunos.add(aluno);
+
+    // cria a relação no Map
+    this.matriculaParaAluno.put(aluno.getNumeroMatricula(), aluno);
+}COPIAR CÓDIGO
+```
+
+E para implementar o método que busca o aluno, basta delegarmos a sua funcionalidade para o método `get`, de `Map`, passando como parâmetro a chave, o número de matrícula, que é passada por parâmetro para o método `buscaMatriculado`:
+
+```java
+public Aluno buscaMatriculado(int numero) {
+    return this.matriculaParaAluno.get(numero);
+}
+```
+
+
+
+#### Como continuar
+
+O grande foco desse treinamento foi o uso da API de Collections, mas a viagem dentro da plataforma não para por aqui.
+
+Se você tiver interesse em aprender mais sobre o mundo OO e design de classes, os cursos sobre SOLID e padrões de projetos podem ser interessantes para você:
+
+- [SOLID com Java: princípios da programação orientada a objetos](https://cursos.alura.com.br/course/solid-orientacao-objetos-java)
+- [Design Patterns em Java I: boas práticas de programação](https://cursos.alura.com.br/course/introducao-design-patterns-java)
+- [Design Patterns em Java II: avançando nas boas práticas de programação](https://cursos.alura.com.br/course/avancando-design-patterns-java)
+
+Ou ainda, deseja aprofundar o conhecimento nas estruturas de dados abordadas no decorrer do curso, temos dois artigos sobre estruturas de dados.
+
+- O primeiro falando das estruturas em si, sem focar tanto em linguagens específicas: [Estruturas de dados: uma introdução](https://www.alura.com.br/artigos/estruturas-de-dados-introducao)
+- E o segundo focado nas estruturas de dados em Java: [Estrutura de Dados: computação na prática com Java](https://www.alura.com.br/artigos/estrutura-dados-computacao-na-pratica-com-java)
+
+Para quem quer entender melhor como funcionam as collections *thread-safe* e threads em geral, sugiro os seguintes cursos:
+
+- [Threads I](https://cursos.alura.com.br/course/threads-java-1)
+- [Threads](https://cursos.alura.com.br/course/threads-java-2)
+
+E claro, tem muito mais, por exemplo a [API de Reflection](https://cursos.alura.com.br/course/java-reflection-meta-programacao) ou treinamentos sobre o mundo Java Web e backend em geral.
+
+
+
+### O que aprendemos neste capítulo:
+
+- A interface `Map`.
+- As implementações `HashMap` e `LinkedHashMap`.
+- Vantagens e desvantagens do uso do `Map`.
+
+
+
+#### Novidades do Java 9 e para frente
+
+[Conteúdo Extra | Alura - Cursos online de tecnologia](https://cursos.alura.com.br/extra/alura-mais/novidades-do-java-9-e-para-frente-c228)
+

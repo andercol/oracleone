@@ -1,9 +1,12 @@
 package br.com.alura;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 public class Curso {
@@ -13,6 +16,7 @@ public class Curso {
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private Set<Aluno> alunos = new LinkedHashSet<>();
 	//private Set<Aluno> alunos = new TreeSet<>();
+	private Map<Integer, Aluno> matriculaParaAluo = new HashMap<>();
 
 	public Curso(String nome, String instrutor) {
 		super();
@@ -54,7 +58,8 @@ public class Curso {
 	}
 
 	public void matricula(Aluno aluno) {
-		this.alunos.add(aluno);	
+		this.alunos.add(aluno);
+		this.matriculaParaAluo.put(aluno.getNumeroMatricula(), aluno);
 	}
 	
 	public Set<Aluno> getAlunos() {
@@ -63,5 +68,9 @@ public class Curso {
 
 	public boolean estaMatriculado(Aluno aluno) {
 		return this.alunos.contains(aluno);
+	}
+
+	public Aluno buscaMatriculado(int numero) {
+		return matriculaParaAluo.get(numero);
 	}
 }

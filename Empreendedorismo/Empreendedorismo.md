@@ -18,3 +18,11 @@ Ambição (Crescimento)
 
 Orientado 
 
+![image-20230110081303745](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230110081303745.png)
+
+
+
+![image-20230110081601736](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230110081601736.png)
+
+![image-20230110081639622](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230110081639622.png)
+
