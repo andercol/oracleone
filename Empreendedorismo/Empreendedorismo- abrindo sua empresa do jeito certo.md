@@ -103,3 +103,33 @@ A melhor forma de fazer isso é o contrato social. O nosso maior inimigo costuma
 
 **Venda antes**
 Não seja apaixonado pelo seu produto, seja apaixonado pelo seu negócio. Seu negócio é atender uma necessidade, independente dos erros que ocorram enquanto você realiza esta atividade. Não vou te ensinar a vender neste curso, mas vamos ver isso em outros treinamentos aqui na plataforma - e alguns deles comigo.
+
+**Mindset Empreendedor**
+
+Professor Frederico aqui, tudo bem?
+
+Seria arrogância querer determinar "O" mindset empreendedor, o paradigma definitivo por meio do qual você irá atingir o sucesso. O que posso fazer é compartilhar com você a minha forma de entender os negócios e de enxergar este universo. Este curso não vai te entregar todas as ferramentas necessárias. Ele é parte de uma carreira, algo maior que estamos construindo aqui na Alura para empreendedores. Contudo, este curso vai te alertar sobre armadilhas dentro do núcleo central do seu negócio: sua sociedade.
+
+Para mim, Frederico, o inimigo mora dentro de nós mesmos. Em primeiro lugar, empreender é conhecer a si mesmo e entender o que nos motiva, entender o que buscamos e, então, partir em direção a esta busca. Quando abri minha primeira empresa, aos 18 anos, não tínhamos sequer noção de onde queríamos chegar ou como chegaríamos lá. Não eramos profissionais. Eu e meu primeiro sócio levamos de 4 a 6 meses para entender que não estávamos indo a lugar algum.
+
+Aquela primeira sociedade me ensinou que é preciso ser bom em algo, ter algum domínio técnico. Para liderar um negócio sem recursos, sem pessoas, é preciso saber fazer. Parti então na busca pelo desenvolvimento técnico. Aprendi a trabalhar com webdesign e comecei a vender sites e sistemas para web. Ali aprendi que podia ganhar dinheiro, mas ainda não sabia que para ganhar dinheiro de verdade, eu precisaria ir além do cliente convencional, da indicação boca a boca. Este foi o segundo negócio, desta vez sem sócios, que não deu certo. Funcionava para mim como freelancer, mas não pagava as contas de uma empresa.
+
+A terceira oportunidade veio em 2010, com um aporte de R$ 120 mil do governo federal. Foi ótimo, nunca me senti tão bem na vida. Só que não deu certo. Eu já sabia que precisava de time, de comercial, precisava de recursos e tinha os recursos. Só que o produto foi um fracasso e eu não estava maduro ainda para liderar pessoas como acreditei. De volta ao mercado, afinei minhas habilidades de liderança como gerente de projetos e então retornei ao esforço de empreender.
+
+Novamente, mais um produto, mais um negócio, mais uma sociedade. Não deu certo: um era apaixonado pelo produto, o outro queria só vender. Enquanto um aperfeiçoava a ferramenta, o outro tentava lançar o negócio, mas o conflito entre o perfeccionismo e a vontade de vender acabou em pizza. Esta sociedade terminou em 2014. Mas... Eu já tinha outros negócios e já estava pronto para ir além.
+
+Foi em 2015 que efetivamente lancei o negócio que hoje me dá lucro além dos meus projetos pessoais: tem time, tem comercial, tem marketing, tem produto. Tem administração financeira e contábil. Tem o peso de mais de 10 anos batendo cabeça. Agora, com um negócio que dá dinheiro, acredito que eu possa te dizer qual o meu mindset, ou pelo menos a parte que importa para este treinamento:
+
+Você não precisa apanhar para aprender a bater
+Si Vis Pacem Para Bellum
+Venda antes
+Você não precisa apanhar para aprender a bater
+Prepare-se. Faça treinamentos como este. Tenha paciência. Aprenda. Ninguém nasce sabendo e aprender com os próprios erros é mais caro do que aprender com os erros alheios. Cursos como este podem te ajudar muito mais e acelerar sua carreira como empreendedor muito mais do que você investir anos num negócio para saber como não fazer algo.
+
+Si Vis Pacem Para Bellum
+O ditado em latim nos diz que se queremos paz, devemos nos preparar para guerra. É aqui que entra este treinamento. Você precisa estar pronto para os conflitos dentro da sua sociedade. É preciso, também, estabelecer sua liderança ou então alguma liderança. Alguém precisa tomar as decisões, em último caso ou em caso de conflito, e eu recomendo a você resguardar este poder. Também, saiba que dinheiro vai fazer você e seus parceiros entrarem em conflito. Estabeleça regras para saques, para distribuição de lucros e também para prejuízos.
+
+A melhor forma de fazer isso é o contrato social. O nosso maior inimigo costuma ser nós mesmos. Em sociedades, nós e nossos sócios. Estabelecer regras de convívio e regras para gestão de um negócio é como impedimos que o monstro cresça.
+
+Venda antes
+Não seja apaixonado pelo seu produto, seja apaixonado pelo seu negócio. Seu negócio é atender uma necessidade, independente dos erros que ocorram enquanto você realiza esta atividade. Não vou te ensinar a vender neste curso, mas vamos ver isso em outros treinamentos aqui na plataforma - e alguns deles comigo.
