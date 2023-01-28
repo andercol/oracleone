@@ -924,3 +924,129 @@ Olá, aluno. Tudo bom? Na aula passada, nós conhecemos a maneira como os nossos
 
 [04:10] Então a ideia aqui era trazer para vocês o conhecimento dessas camadas, o porquê agora eu tenho uma Controller, o que trafega entre essas camadas e agora, o objetivo é fazermos de fato isso no código e botar a mão na massa, e ver a tela funcionando, mas agora com a nossa implementação. Então não deixem de assistir a próxima aula e vamos botar a mão na massa. Valeu.
 
+
+
+##### **Conhecendo o projeto**
+
+Olá, aluno. Tudo bom? Agora que nós vimos o funcionamento da nossa tela interagindo com o nosso *back-end* e vimos que para o desenvolvimento da nossa aplicação ficar com as boas práticas necessárias, nós vimos que precisamos dividir o nosso projeto em camadas.
+
+[00:21] Agora chegou a hora de darmos o próximo passo, que é de fato ver como vai funcionar esse projeto e botar a mão na massa para conseguirmos desenvolver esse código da melhor maneira. O projeto que nós utilizamos até agora, que é o "loja-virtual-repository", nós não vamos utilizar nessas aulas, então vocês podem dar um close na IDE de vocês, porque nós vamos importar um novo projeto, que está disponível para download na plataforma.
+
+[00:50] No meu caso, ele já está importado, mas para você importarem quando vocês salvarem no diretório de preferência de vocês, vocês vão no menu "File > Import", selecione que você quer adicionar um novo projeto existente ao seu workspace, ele fica em "General > Existing Projects into Workspace". Clique em "Next".
+
+[01:10] Clique em "Browse..." para selecionar o diretório onde vocês salvaram o projeto de vocês. O meu está aqui, em "eclipse-workspace". Tenho o projeto "jdbc-aula-8-projeto-completo", seleciono agora a pasta "loja-virtual-view-repository" e seleciono essa pasta. No meu caso, eu não posso selecionar o projeto, porque ele já está importado.
+
+[01:36] O projeto de vocês estará selecionável, é só selecionar e clicar no botão "Finish" e vocês vão ver essa estrutura de projeto. Então aqui nós começamos a ver alguma diferença em relação ao nosso outro projeto. Primeiro que já não temos mais aquele tanto de main, que usamos ao longo do curso para ir testando as operações com o banco de dados, nós temos só o `TestaOperacaoComView`, que é exatamente o main que vai chamar a nossa tela.
+
+[02:00] E aqui nós já vamos ver. Nós temos a nossa Controller, que é o controlador, que recebe a requisição da tela, encaminha para a DAO correta. Quando a DAO processa a informação, ela devolve para a Controller, que devolve para a *view*. Então é esse desenvolvimento em camadas, essa chamada em camadas que nós vimos no desenho e que fica bem representado pelos pacotes.
+
+[02:25] As DAOs, nós já tínhamos, então não é nada novo, nós só vamos passar por elas rápido aqui, porque nós vamos ver que agora, por exemplo, em `ProdutoDAO`, eu coloquei no nosso projeto novos métodos para a nossa tela ficar com todas as operações, pelo menos as operações básicas, que são o select, o insert, o update e o delete.
+
+[02:52] Então eu tenho agora um método `salvar`, eu tenho o `salvarComCategoria`, porque quando nós salvávamos, ele não estava salvando o ID da categoria na tabela de produto. Como agora, quando formos inserir através da nossa tela, vai ter aquela ComboBox de categorias, então agora eu tenho um novo método aqui, que é o que vamos chamar da tela, que vai inserir também o *ID da categoria.
+
+[03:20] Então vai ficar mais conciso, vai ficar mais real o nosso exemplo. E temos o método de listar, de buscar, que nós já tínhamos também, o de deletar, alterar, tudo isso nós já tínhamos feito, só que agora eu coloquei tudo na nossa DAO. A `CategoriaDAO` não teve mudança, nós não vamos usar os métodos de categoria, vamos utilizar só o listar, que retorna todas as categorias para montarmos a nossa lista de categorias.
+
+[03:49] Então a DAO, a única coisa que ela teve de diferente foi isso. A nossa `ConnectionFactory` continua aqui, porque nós vamos precisar ainda pegar uma conexão para interagir com o banco de dados. Nossas classes de modelo também continuam aqui, nós vimos que elas são essenciais nessa estrutura de *view*, Controller e DAO, porque são os objetos que são trafegados entre as camadas, são essas nossas classes de modelo.
+
+[04:16] Chegamos enfim à nossa *view*. Eu vou passar com vocês, para vocês entenderem mais ou menos o que foi feito aqui na tela. Só que eu quero chamar a atenção para um detalhe aqui: nós utilizamos o Swing para criar essa nossa tela. O Swing, ele é um recurso do próprio Java, mas ele é para desenvolvimento em desktop, ou seja, para aquelas telas que nós vamos subir na nossa própria máquina.
+
+[04:44] Hoje em dia não é mais tão utilizado, dificilmente vocês vão ver projetos que estão iniciando agora começando como um projeto desktop. Mas vamos ver projetos web, nós vamos ver projetos mobile, só que essas outras tecnologias, elas exigem recursos a mais. Então, por exemplo, se fossemos pensar no desenvolvimento web, nós vamos pensar em HTML, CSS, JavaScript.
+
+[05:14] Nós podemos pensar, hoje, em aplicações *front-end* desacopladas do *back-end*. Então nós temos outro conhecimento que nós precisamos ter para desenvolver na web. Dessa forma, com o Swing, é interessante porque tudo o que aprendermos aqui, sobre a requisição para uma *view*, passando pelas camadas, nós vamos utilizar no desenvolvimento *web* e no desenvolvimento mobile.
+
+[05:42] Inclusive nós temos outras formações que vocês podem fazer, quem quer ser especialista em desenvolvimento mobile, nós vamos ter as próximas formações, que vamos aproveitar esse conhecimento aqui e vamos aprofundar ainda mais o conhecimento para desenvolver na web.
+
+[06:00] Então foi basicamente essa a nossa ideia aqui, trazer um pouco já desse conhecimento para vocês, mas indico para a próxima formação para ter um conhecimento 100% de como funciona todo esse mundo da web. Voltando para o nosso exemplo, então eu tenho o `ProdutoCategoriaFrame`, que vai ser aquela nossa tela.
+
+[06:19] O Swing, ele vai usar objetos Java para representar os objetos da nossa tela, então pode ver que eu tenho um `JLabel`, `JTextField`. Então Label é o nome que fica em cima da caixa de texto, que no nosso caso é o nome do produto, a descrição do produto. O `JTextField` é exatamente onde escrevemos qual é o nome do produto, qual é a descrição do produto.
+
+[06:41] Nisso nós vamos ter uma classe, um recurso do Java para cada recurso da tela: `JComboBox`, o `JButton`, o `JTable`. E como funciona? Dentro do construtor da nossa `ProdutoCategoriaFrame` que nós vamos configurar toda a tela. Então, por exemplo, esse `super("Produtos");` é o que vai ficar na barra superior quando subirmos a nossa aplicação.
+
+[07:04] Então nós vamos ver que vai ter Produtos na parte de cima da tela, isso é só um detalhe. E todas as configurações, eu instancio as minhas Controllers, eu tenho até um atributo `private ProdutoController produtoController;`, que nós vamos utilizar lá embaixo, vocês já vão ver os nossos métodos.
+
+[07:22] Temos `labelNome`, então o nome do produto. Aqui eu estou configurando as minhas Labels, a posição das minhas Labels, qual vai ser a cor da minha Label. E aqui eu adiciono na minha tela, que é o meu `container`. Então a partir desse ponto eu tenho isso inserido na minha tela. Isso vai servir para todos os recursos, então eu tenho `textoNome`, `textoDescricao`.
+
+[07:45] A única coisa que eu tenho, no `comboCategoria`, como ele é um `ComboBox` e ele lista as minhas categorias, eu tenho que fazer um `forEach` nesse método `listarCategoria`, que está chamando a nossa Controller e que vai nos retornar todas as categorias e vai adicionar na `ComboCategoria`.
+
+[08:05] Quando eu selecionar a categoria, ele, de alguma forma, que nós vamos ver ainda, vai pegar o ID desse item e vai salvar o produto na minha tela com o ID da categoria que eu selecionei. De resto aqui, a mesma coisa, só configuração da Label, do botão, o tamanho do botão, a posição, enfim. Então no nosso construtor nós fazemos isso, além de configurar os `ActionListener` dos botões.
+
+[08:32] Então, quando eu clico no `botaoSalvar`, ele vai chamar um método `salvar();`, vai `limparTabela();` e vai `preencherTabela();`, porque agora eu consigo mostrar esse novo recurso salvo no nosso banco de dados. A mesma coisa ele vai fazer, por exemplo, no `deletar();`, ele deleta, ele `limparTabela();` e ele `preencherTabela();`. Nós já vamos ver esse comportamento com detalhes.
+
+[08:52] E o `botaoEditar`, o `botaoLimpar`, que apenas limpa os nosso Text fields. Aqui nós temos as nossas regras de *front-end*, de *view*. Ou seja, as regras da nossa tela. Como são essas regras? Por exemplo, eu faço validações na hora de salvar, por exemplo. Primeiro eu preciso verificar, na hora de salvar, se o meu nome e descrição, os meus Text fields, eles estão diferentes de vazio.
+
+[09:23] Se estiverem, eu pego o produto, pego a categoria, pego todas as informações, chamo a minha `controller` e salvo. E faço um alerta, falando que que o produto foi salvo com sucesso. Se isso não for verdade, se os campos estiverem vazios, eu dou um `JOptionPane`, que é o recurso para fazer um alerta na nossa tela, falando que o nome e a descrição devem ser informados.
+
+[09:48] Então aqui são as nossas regras de *view*, por isso que eu não quis misturar e chamar as nossas DAO diretamente daqui, porque senão teríamos que passar conexão a partir da nossa *view* para a nossa DAO, e não faz muito sentido. Por isso o desenvolvimento em camadas, eu passo essa responsabilidade para a minha Controller, aqui são só as regras de *view*.
+
+[10:09] Por enquanto, como nós fazemos na `TestaOperaçãoComView`? Eu tenho um main, que vai chamar a nossa classe para mostrar a tela. Por enquanto, se eu mandar executar esse código, nós vamos ver que está diferente daquele da nossa primeira aula, que eu mostrei o funcionamento já interagindo com o banco de dados.
+
+[10:31] Nós vamos ver que, por enquanto, ele está mostrando que o produto é *null*, produto de teste, porque realmente eu ainda não estou conversando com o banco de dados. Então aqui eu só estou simulando. Se eu botar aqui um "aa" em nome do produto e em descrição do produto, e mando salvar, ele me dá uma mensagem de salvo com sucesso, mas nós vamos ver que ele só mostra no console, não vai para o banco de dados.
+
+[10:59] O nosso objetivo agora é qual? É exatamente isso: chegar no `CategoraController` e no `ProdutoController` e desenvolver as regras que vão fazer com que consigamos fazer essa interação com o banco de dados. Mas nessa aula já falamos muito, nós já fizemos um Overview de todo o projeto, de como ele está por enquanto. Esse desenvolvimento vai ficar para o próximo vídeo. Eu vou ficando por aqui. Até lá. Valeu.
+
+
+
+##### **Revisando o projeto**
+
+Olá, aluno. Tudo bom? Anteriormente eu deixei um desafio para vocês, para que vocês refatorassem o código com a melhor prática de tratamento de exceção, tratando na DAO, onde realmente a exceção, ela pode ocorrer. Também deixei o desafio para vocês implementarem a `ProdutoController`.
+
+[00:27] Agora nós vamos passar pelo meu código para vocês verem como eu fiz, para vocês verem se está de acordo com o de vocês e executar o projeto, agora com todas as funcionalidades ocorrendo com sucesso. Então primeiro vamos passar pela `CategoriaDAO`, eu fiz no `listarComProduto()` também com o try catch, relançando uma `RuntimeExcepiton`, que é uma exceção *unchecked*.
+
+[00:58] Se você está tendo alguma dúvida referente ao que eu estou falando aqui de *checked* e *unchecked exception*, eu recomendo fortemente fazer o nosso curso de Exceções, que ele é bem completo e vai te dar uma base muito boa para você saber como tratar da melhor maneira essas exceções.
+
+[01:17] Então, na `listarComProduto()` fizemos a mesma coisa que nós tínhamos feito no método `listar()`. Na `ProdutoDAO` fizemos também um tratamento semelhante, com try e catch em cada um dos métodos, então `salvar`, `salvarComCategoria`, todos eles agora são tratados caso ocorra uma SQL Exception no momento de executar a operação, nós já fazemos o tratamento no local, onde é para ser feito.
+
+[01:46] No `ProdutoController`, nós fizemos basicamente aquele mesmo trabalho que nós tínhamos feito com `CategoriaController`, só que usando o `ProdutoDAO`. Então nós instanciamos o `ProdutoDAO`, passando uma Connection que nós tínhamos recuperado com `recuperarConexao()` e chamamos o método da DAO, o método correspondente de cada DAO na nossa Controller.
+
+[02:15] Então `deletar()` chama o `.deletar()`, `salvar()` chama o `.salvar()`, bem parecido com o que nós tínhamos feito no `CategoriaController`. Feito isso, é para o nosso projeto estar 100% funcional, agora nós vamos poder ver isso no `TestaOperacaoComView`, mandando executar o projeto e vamos dar uma navegada na nossa tela para ver se está tudo funcionando corretamente.
+
+[02:40] Subimos a nossa aplicação. Então agora nós já vemos que nós estamos listando os produtos da nossa base de dados. Vamos ver os comandos, se estão todos funcionais, então se eu mandar limpar aqui, ele tem que zerar as caixas de texto. Aparentemente ok. Vamos inserir um novo produto, vamos colocar o "Microfone", "Microfone para computador", a categoria dele vai ser um eletrônico.
+
+[03:08] Se eu mandar salvar, salvo com sucesso. O microfone está inserido na *grid* e, consequentemente, no nosso banco de dados. Agora o nosso "Celular com câmera" acabou no estoque, vamos editar para mostrar um "Celular sem câmera", para mostrar que é o que nós temos disponível. Mando alterar, fez a alteração, certo.
+
+[03:30] E o "Sofá" não é um item que eu vou vender mais na minha loja, eu quero excluir esse item para não mostrar mais para os clientes. Mando excluir e está aí: item excluído com sucesso. Apenas três produtos agora no nosso estoque. Bom, pessoal, então com isso nós terminamos o desenvolvimento da nossa tela, nós conseguimos entender como que funcionam essas camadas, tudo certo.
+
+[03:53] O porquê temos uma Controller, que é exatamente para tirar a responsabilidade que não é da *view* da *view*, nós passamos para essa Controller, então ela que vai abrir conexão, ela que vai comunicar com a DAO e ela só retorna para a *view* as informações necessárias para que a *view* mostre para a tela, que é o objetivo dela.
+
+[04:16] As nossas classes, elas tem que ter responsabilidade única, então a *view* só mostra informação, a Controller faz esse controle ali no meio, então pega a requisição, manda para a DAO correta. A DAO sim vai no nosso banco de dados, que ela é responsável por isso. Então nós vimos que o nosso projeto fica muito bem desenvolvido.
+
+[04:36] Então espero que vocês tenham gostado desse incremento, dessa nossa tela. Qualquer dúvida que vocês tiverem sobre alguma coisa que nós fizemos aqui na aula, mande no nosso fórum que nós estaremos à disposição para retirá-las. E, no mais, é isso. Vejo vocês no próximo vídeo. Valeu.
+
+##### **O que aprendemos?**
+
+Nessa aula aprendemos:
+
+- uma aplicação é escrita em camadas
+
+  - camadas clássicas são *view*, *controller*, *modelo* e *persistência*
+
+- o fluxo entre as camadas segue a ordem:
+
+  ```rust
+  view <--> controller <--> persistenciaCOPIAR CÓDIGO
+  ```
+
+- nesse curso focamos na camada de persistência
+
+- uma camada não deve deixar "vazar" detalhes da implementação (por exemplo uma exceção como `SQLException`)
+
+- em outras formações você aprenderá como criar a **view** ou **front-end** para Android (*mobile*) ou web (*html*)
+
+- 
+
+#### **Conclusão**
+
+Olá, aluno. Tudo bom? Para você que chegou até aqui, meus parabéns. Nós tivemos momentos de muito aprendizado. Nós vimos como fazer a nossa aplicação interagir com o banco de dados, nós aprendemos sobre padrões para que essa comunicação seja feita da melhor maneira possível, com o código legível, com o código de fácil manutenção.
+
+[00:23] Então nas nossas DAOS, nós conseguimos concentrar os métodos que irão fazer aquelas operações com o banco de dados, como o select, o insert, o update. Além disso, nós vimos como nós podemos não passar por problemas, igual o query N+1, e apenas usando uma melhora na nossa query, que são os joins, no nosso caso, nós fizemos o Inner join com a tabela Produtos e Categoria.
+
+[00:54] Vimos que em vez de eu ir no banco de dados várias vezes, fazendo com que eu possa ter uma queda no meu banco de dados, eu possa ter uma queda de performance nesse banco de dados, eu vá apenas uma vez e traga as informações que eu preciso, e eu posso trabalhar com ela da maneira que eu bem entender.
+
+[01:16] Então após passar por tudo isso, nós vimos como podemos criar uma tela para conseguirmos fazer essa interação com o banco de dados. O nosso usuário, ele não vai botar a mão no código, ele vai botar a mão em uma interface gráfica, seja ela web, que nós vimos que pode ser o nosso próximo passo, seja ela mobile ou até desktop, como nós fizemos, que não é tão recomendado, mas que funciona.
+
+[01:49] E nós vimos que para isso, nós temos que tirar códigos que não são de responsabilidade da nossa *view*, então esses códigos, eles vão ficar em uma camada própria, para que o nosso código fique sempre muito bem organizado. Então, só para relembrarmos, eu vou novamente executar a nossa tela, para vermos o quão legal ficou podermos fazer as nossas operações a partir de uma interface, para facilitar a vida do usuário.
+
+[02:25] Então, dito isso, mais uma vez eu os parabenizo por ter chegado até aqui. Não é fácil fazer um curso com tantos recursos, muitas vezes pode ser cansativo, mas eu acredito que isso vai ajudar bastante vocês na carreira como desenvolvedor. Nós sempre falamos que se tiver qualquer dúvida em algum ponto do curso, seja nas aulas, seja nos exercícios, podem nos mandar no fórum, vamos estar à disposição para auxiliar vocês.
+
+[03:02] E, como foi informado durante as aulas, não deixem de fazer as próximas formações. Agora você pode querer ser um especialista mobile, nós temos a formação para isso. Você pode querer ser um especialista em desenvolvimento web, também temos uma formação para isso. A ideia é que vocês adquiram cada vez mais conhecimento através da plataforma. Então eu vou ficando por aqui e vejo você no próximo curso.
+
