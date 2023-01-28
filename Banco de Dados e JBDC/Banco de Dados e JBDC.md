@@ -654,3 +654,171 @@ Nesta aula, aprendemos que:
 - Como existe uma interface que representa a conexão (`java.sql.Connection`), também existe uma interface que representa o *pool* de conexões (`javax.sql.DataSource`)
 
 - **C3PO** é uma implementação Java de um *pool* de conexão
+
+
+
+# **Criando o modelo Produto**
+
+[00:00] Fala, aluno. Tudo bom? Dando continuidade ao nosso curso JDBC, gostaria de voltar na nossa classe `TestaInsercao` e verificarmos aqui uma questão. Hoje, na minha base de dados, eu tenho uma tabela chamada produto. Essa tabela produto, ela tem os seus atributos: o ID, nome e descrição.
+
+[00:25] Do lado do Java, nós viemos tratando esses atributos apenas como strings, ou seja, eu não tenho uma representatividade de produto igual nós temos do lado do banco de dados. Então, por exemplo, quando eu quero fazer o *bind* dessas interrogações do `VALUES (?, ?)`, que eu quero *setar* de fato os valores dessas interrogações, eu estou recebendo nesse método `adicionarVariavel` uma `(String nome, String descricao, PreparedStatement stm)`.
+
+[00:53] E estou *setando* essas strings no meu `setString` do meu `PreparedStatement`. Só que isso não fica muito legal, eu queria de fato ter a mesma representatividade do lado do Java que eu tenho no banco de dados. Então eu queria ter um modelo de produto. Tem uma forma de fazer isso no Java e nós vamos criar agora dessa forma.
+
+[01:25] Dentro do "New Java Class", do "package" "br.com.alura.jdbc.modelo", eu vou criar uma classe chamada "Produto". Essa `public class Produto` vai conter exatamente o que eu tenho na minha tabela: `private Integer id;`, eu vou ter `private String nome;` e uma `private String descricao;`. Colocamos todos os atributos como privados por conta do encapsulamento da nossa classe.
+
+[02:07] Por enquanto a classe vai ficar dessa forma porque eu não quero gerar métodos e nem nada desnecessário nesse momento. Agora eu quero fazer um teste inserindo um produto com essa classe, com a representatividade dessa classe `Produto` e não apenas strings soltas no código. Então eu vou criar mais uma classe e ela vai se chamar `TestaInsercaoComProduto`, que nós vamos utilizar o `Produto` para inserir um produto.
+
+[02:41] Eu já vou mandar gerar o `public static void main`, para não precisarmos ficar gerando ele. Então, primeira coisa: vamos instanciar o nosso produto. E o nosso produto vai ser uma cômoda agora no banco de dados. Vou dar um `Produto comoda = new Produto("", "");`. Só que eu já quero instanciar o meu produto passando o nome dele e a descrição, vai ser `Produto comoda = new Produto("Cômoda" , "Cômoda Vertical");`.
+
+[03:15] Ele está reclamando, falando que eu não tenho ainda esse construtor que recebe duas strings. Vamos na nossa classe `Produto` então, "Ctrl + 3" e eu vou na opção "Generate Constructor using Fields - Choose fields to initialize and constructor from superclass to call". Então vamos criar um construtor que tenha os atributos. Não vou selecionar o ID, só o "nome" e a "descricao". Mandou gerar.
+
+[03:44] Deu um espaço aqui no código, para ficar organizado. Agora na nossa `TestaInsercaoComProduto` está tudo certo. Pronto. Agora para começarmos a conversar com o banco de dados, eu preciso perguntar para o meu Pool de conexões, se tem uma conexão disponível para nós.
+
+[04:05] Então eu chamo o `try()`, e estou recuperando uma connection. Vou perguntar para a nossa Connection factory se tem uma conexão disponível no Pool de conexões. Então `try(Connection connection = new ConnectionFactory().recuperarConexao())`. Vamos adicionar o `throws SQLException`, porque senão ele vai reclamar.
+
+[04:33] Estamos querendo testar o `TestaInsercaoComProduto`, então o nosso comando vai ser o Insert. Então eu vou escrever aqui `String sql = "INSERT INTO PRODUTO (NOME, DESCRICAO) VALUES (?, ?)";`, o `VALUES` com dois atributos que ainda vão receber o seu conteúdo, o nome e a descrição do produto.
+
+[05:05] Agora eu vou preparar o Statement, então eu vou pegar `try(PreparedStatement pstm = connection.preparedStatement(sql))`, passo o `sql`, só que eu quero, no momento da inserção, recuperar a nossa chave gerada, então vai ser `try(PreparedStatement pstm = connection.preparedStatement(sql, Statement.RETURN_GENERATED_KEYS))`.
+
+[05:31] Agora nós vamos *setar* os atributos. São duas strings, então `pstm.setString(1, x);` no primeiro parâmetro, e o nome vai ser o `pstm.setString(1, comoda.getNome());`. Obviamente esse parâmetro não existe ainda porque nós não criamos o método `.getNome()` na nossa classe `Produto`. E também vamos ter o mesmo problema com o segundo parâmetro, que é `pstm.setString(2, comoda.getDescricao);`.
+
+[06:05] Para o `TestaInsercaoComProduto` compilar, nós temos que ir na nossa classe `Produto` e vamos mandar criar. "Ctrl + 3" novamente. Vou mandar um "Generate Getters and Setters - Generate Getter and Setter methods for type's fields". Expando o "descricao", só vou usar o "getDescricao()". Expando o "nome" e só vou usar o "getNome()".
+
+[06:22] A ideia, na nossa classe `Produto` é criarmos só os métodos que vão ser utilizados mesmo, para não ficar uma classe com getters e setters desnecessários. E agora vou mandar executar o `TestaInsercaoComProduto` com o `pstm.execute();`, bem padrão, como já fizemos isso em outras oportunidades.
+
+[06:45] Agora eu quero recuperar a chave gerada. Nós vimos que para recuperar a chave gerada, nós temos o `try(ResultSet rst = )` e, para pegarmos essa chave, vai ser `try(ResultSet rst = pstm.getGeneratedKeys())`. Enquanto eu tiver um próximo, eu vou *setar* então no meu `Produto` o ID. Eu vou pegar `while(rst.next()){`, `comoda.setId(rst.getInt(1));`, que no primeiro index é o ID.
+
+[07:27] Obviamente não vai compilar também, porque nós não temos o `setId` em `Produto`. Então deixa eu dar um "Ctrl + 3" de novo , dei um "Ctrl + F3" sem querer. "Ctrl + 3", "Generate Getters and Setters - Generate Getter and Setter methods for type's fields", expando o ID, "setId(Integer)".
+
+[07:49] Vamos só tirar os espaços que ele criou aqui, desnecessários. Também quero tirar esses dois espaços. Agora pegou aqui, a nossa classe `TestaInsercaoComProduto`, ela já não está mais com nenhum erro, está compilando perfeitamente. Só que agora eu quero fazer o seguinte, eu quero mostrar qual foi o produto criado.
+
+[08:16] Então para isso, em `TestaInsercaoComProduto`, eu vou dar um `System.out.println(comoda);`. Se eu mandar executar dessa forma, ele vai me mostrar o valor da variável na memória, então ele vai me trazer aquele número esquisito e eu não quero isso. Mas também eu não quero sair escrevendo getters e setters desnecessários, só para mostrar no nosso console o produto de forma bonita.
+
+[08:45] Então, para isso, eu tenho uma solução: em `Produto`, eu vou sobrescrever o `public String ToString()` e para esse `return super.toString();` eu troco para `return String.format();` e vou falar `("O produto criado foi: %d, %s, %s", );`. Aqui eu estou falando que o primeiro vai ser substituído pelo ID, o segundo pelo nome e o terceiro pela descrição. Já vamos ver o resultado agora.
+
+[09:32] Então vou passar `return String.format("O produto criado foi: %d, %s, %s", this.id, this.nome, this.descricao);`. Se mandarmos testar agora a nossa classe `TestaInsercaoComProduto`, ele vai *logar* as informações no nosso Pool de conexões, que nós vimos anteriormente e vai mostrar que o produto criado foi o de ID 110, a nossa cômoda, cômoda vertical.
+
+[10:08] Agora nós temos, de fato, a representatividade de um produto do lado do Java também, só que agora resolvemos um problema, mas eu queria chamar a atenção de vocês para uma outra questão: toda vez que eu vou escrever as classes, os meus main, eu tenho que repetir o `try`, com o `recuperarConnection`, tenho que escrever o `String sql`, tenho que preparar um Statement.
+
+[10:41] Enfim, eu tenho que fazer todo esse passo, seja para inserir, seja para listar. Então fica um alerta aqui. Nós já vimos sobre repetir código em várias classes, isso é um exemplo disso. Como nós podemos melhorar esse código? Talvez tenha uma forma de extrair isso para um método? Enfim, vou deixar essa questão com vocês, porque a nossa aula de agora fica por aqui.
+
+[11:16] Espero que vocês tenham gostado agora de trabalhar com o `Produto`, que é de fato a representatividade de um produto, então agora acho que fica até mais fácil de ler o código, vai ficar mais organizado. Mas vamos deixar essa indagação e nas próximas aulas nós vamos resolver essa questão. Então, espero que você tenha gostado e vejo você no próximo vídeo.
+
+
+
+# **DAO com inserção do produto**
+
+ Fala, aluno. Tudo bom? Anteriormente nós vimos como utilizar uma classe de modelo para fazer persistência dos nossos dados. Só que ao realizar os testes, nós encontramos um outro problema: nós vimos que toda vez que nós precisamos inserir ou buscar informações no nosso banco de dados, nas nossas classes de teste nós estamos repetindo código.
+
+[00:27] Então se eu quero inserir um produto, eu pego e repito uma string com a query, preparo o Statement, executo o meu SQL, enfim, fazemos uma série de repetições em várias classes. A ideia é melhorar isso. Nós já vimos que não é nunca aceitável sairmos repetindo código na nossa aplicação. Então qual seria um ponto interessante?
+
+[01:06] Talvez, se eu estou inserindo um produto, se eu estou trabalhando com um produto, eu poderia ter uma classe onde quando eu instanciasse essa classe, eu tivesse um método salvar produto, porque eu só precisaria passar o produto, que vai ser inserido, passar uma conexão para esse método e ele faria o trabalho para mim. Então eu deixaria uma classe mais específica para as operações de banco de produto.
+
+[01:43] Então, para testarmos isso, eu vou criar uma classe e eu vou chamar ela de "PersistenciaProduto". Essa classe, eu quero que ela tenha um construtor e que ela receba uma Connection, então `public PersistenciaProduto(Connection connection)`. Eu vou ter também um atributo, o `private Connection connection`.
+
+[02:22] Vou pegar então `this.connection = connection;` e, como falado, eu quero um método `public void salvarProduto()`. Esse método, ele vai receber um produto, então `public void salvarProduto(Produto produto)`. Eu vou mandar importar esse primeiro `Produto`. E qual seria a lógica do meu `salvarProduto`?
+
+[02:53] Seria essa lógica que nós utilizamos para fazer o teste na classe `TestaInsercaoComProduto`. Então toda essa `String sql = "INSERT INTO PRODUTO (NOME, DESCRICAO) VALUES (?, ?)"` eu posso extrair da classe `TestaInsercaoComProduto` e posso jogar para dentro do `PersistenciaProduto`.
+
+[03:14] Só que antes nós trabalhávamos com um produto específico, agora não, agora eu quero receber qualquer produto, então substitui o `pstm.setString(1, comoda.getNome());` por `pstm.setString(1, produto.getNome());` e o `pstm.setString(2, comoda.getDescricao());` por `pstm.setString(2, produto.getDescricao());`.
+
+[03:25] E o `comoda.setId(rst.getInt(1));` por `produto.setId(rst.getInt(1));`. Esse produto vai ser adicionado à nossa base de dados. O que ele está reclamando aqui? Vou adicionar o `throws SQLException`. Nosso código parou de reclamar. Aqui dentro de `try(Connection connection = newConnectionFactory().recuperarConexao())`, eu só vou precisar dar um `new PersistenciaProduto(Connection).salvarProduto(produto);`.
+
+[03:56] No nosso caso, eu vou passar `new PersistenciaProduto(Connection), salvarProduto(comoda);`. Veja a diferença já no nosso código. Eu tenho uma classe especializada em trabalhar com a persistência das informações de produto e nas minhas classes de teste, ela fica mais sucinta, bem mais fácil de ler, de dar manutenção. Só que vamos supor que nessa situação, após eu salvar o produto, eu queira listar esse produto.
+
+[04:36] Então eu não vou poder mais chamar ele dessa forma, com `new PersistenciaProduto(Connection), salvarProduto(comoda);` - quer dizer, vou poder, mas vai ser mais fácil então eu instanciar a minha `PresistenciaProduto persistenciaProduto = new PersistenciaProduto(connection);`, passando a minha `connection` para ser o meu construtor.
+
+[04:59] E, no lugar de `new PersistenciaProduto(Connection), salvarProduto(comoda);`, eu uso só a minha referência, a `persistenciaProduto.salvarProduto(comoda);`. Então, se depois de salvar eu precisar listar, eu vou criar aqui o `//persistenciaProduto.listar();`. Esse comando devolve uma `Lista = //persistenciaProduto.listar();`. Enfim, esse comando não existe ainda, só estamos pensando como ficaria a nossa situação.
+
+[05:33] Vamos ver essa classe `PersistenciaProduto`, o que ela está fazendo. No desenho - vou fazer um desenho aqui. Eu tenho o nosso banco de dados, ele é o nosso MySQL. Eu tenho a nossa aplicação. Eu tenho agora um item que se chama Persistência Produto. O que ele faz? Ele acessa os dados do nosso objeto.
+
+[06:30] Então eu tenho um objeto produto e quem está fazendo acesso desse objeto no nosso banco de dados é essa classe Persistência Produto. Então, a minha aplicação chama a Persistência Produto, a Persistência Produto vai no MySQL e nos traz as informações. Essa Persistência Produto, ela é um Data Access Object.
+
+[07:08] O Data Access Object é quem trabalha com as informações do nosso objeto no banco de dados. Então ele é uma DAO. Essa Persistência Produto, se ela é um Data Access Object, não faz muito sentido eu trabalhar com o nome `PersistenciaProduto`. Eu posso utilizar o DAO, produto DAO, porque seu usar Produto Data Access Object, então vai ficar muito grande o nosso nome.
+
+![Diagrama com título "DAO: Data Access Object" com o elemento "App" conectado por uma seta apontando para "Persistência Produto", o qual aponta para "MySQL".](https://caelum-online-public.s3.amazonaws.com/1451-jdbc/Transcri%C3%A7%C3%A3o/Imagens/aula6_video2_imagem2.PNG)
+
+[07:50] Então eu vou fazer um "Refactor > Rename" em `PersistenciaProduto` e vou utilizar "ProdutoDAO". Vou clicar em "Finish". Eu já tenho um pacote criado, vocês podem criar o de vocês, mas para ficar mais organizado, eu vou mandar o "Produto DAO", vou dar um "Refactor > Move" para esse pacote "br.com.alura.jdbc.dao". Perfeito.
+
+[08:21] Então agora, com esse `ProdutoDAO`, tudo o que é referente a acesso ao banco de dados para trabalhar com as informações do meu objeto vão ficar nessa classe. Então, se eu quiser alterar uma informação de produto, que está no meu banco de dados, eu vou criar o método dentro de `ProdutoDAO`.
+
+[08:50] A vantagem é que quando eu tenho um `ProdutoDAO`, eu não preciso mais especializar aqui os meus métodos para informar que eles são um produto, porque ele já está dentro de uma classe que só trabalha com produto. Então, `TestaInsercaoComProduto`, eu vou mudar `persistenciaProduto.salvarProduto(comoda);`, eu vou falar `produtoDao.salvar(comoda);`.
+
+[09:11] Vai ficar bem bacana, porque se eu mudar de `ProdutoDAO persistenciaProduto = new ProdutoDAO(connection);` para `ProdutoDAO produtoDao = new ProdutoDAO(connection);`, quando eu for ler as minhas chamadas ao método, eu vou ver `produtoDao`, chama o seu método `.salvar();`. Então eu já estou sabendo aqui que o que o método `.salvar();`, ele é de produto, ele vai salvar um produto.
+
+[09:43] É importante ressaltar que esse DAO, não sou eu quem estou inventando, ele é um *pattern*, então ele é o padrão da linguagem, que tudo que é sobre acesso a objeto, seja banco de dados, seja algo externo à sua aplicação, geralmente ele vai ter o sufixo DAO. É obrigatório? Não.
+
+[10:13] Mas é aquilo: tudo o que é convenção, tudo o que é padrão, mesmo que não seja obrigatório, eu recomendo fortemente utilizar, porque vai ser assim na sua aplicação, vai ser na minha aplicação e vai ser nas aplicações corporativas espalhados pelo mundo todo. Então a ideia da DAO é exatamente isso: criamos um local onde eu vou trabalhar com a parte de persistência da minha aplicação, ela fica toda centralizada nessa DAO.
+
+[10:46] A DAO tem por objetivo conversar com o nosso banco de dados, então onde eu vou salvar produto, eu posso chamar de qualquer main desses que eu já criei. Só que eu sempre vou instanciar a minha DAO de produto e vou passar o meu produto para ela. Dentro da DAO, esse método, o `.salvar()`, o `.listar();`, eles vão se virar, mas em um único lugar vamos ter centralizado todos eles e eles que vão executar essas querys com o nosso banco de dados.
+
+[11:26] Então a nossa aplicação agora já começa a ficar com essa nossa camada de dados de persistência bem mais organizada, o nosso código tende a ficar mais organizado também. Agora, quando eu for fazer os próximos testes, eu não preciso mais sair criando de novo todos esses SQLs, porque ele vai estar centralizado já no mesmo lugar.
+
+[11:54] E agora já fica utilizando a DAO, utilizando um Pool de conexões, as interfaces JDB, Datasource, já começamos a ter uma aplicação do mundo real. Quando você for trabalhar em aplicações corporativas, elas vão ter todos esses conceitos que estamos aplicando aqui e isso é muito legal. Então, aluno, eu espero que você tenha gostado e até a próxima aula.
+
+###### **Listando no ProdutoDAO**
+
+Fala, aluno. Tudo bom? Dando continuidade ao nosso curso de JDBC, vamos voltar à nossa classe `TestaInsercaoComProduto` e vamos revisar o que foi feito até agora, referente à nossa camada de persistência. Nós vimos que foi necessário criar uma DAO, porque essa DAO vai ficar responsável por toda a parte de comunicar com o nosso banco de dados.
+
+[00:27] Então é ela quem vai conter as nossas queries, ela quem vai conter os nossos Prepared Statements, porque eles estavam repetidos nas nossas classes main. Nós vimos que código repetido nunca é uma boa prática no desenvolvimento de software. Então nós chegamos no `ProdutoDAO`, e esse `ProdutoDAO` agora, ele contém um método `.salvar();`.
+
+[00:52] Todo mundo que precisar salvar um produto, vai apenas instanciar `ProdutoDAO`, passar uma connection para o seu construtor e vai passar o produto que deseja salvar. Só que nós vimos que agora nós podemos executar mais de um comando na nossa DAO, foi inclusive em um exemplo que nós estávamos usando para verificar, que agora eu quero salvar e depois eu quero listar.
+
+[01:22] Então por isso que até extraímos a instância da nossa DAO, porque a partir desse momento precisamos só usar referências e ir chamando os seus métodos. Eu não preciso toda vez instanciar um `ProdutoDAO`, passando a connection, faço isso uma vez só, e chamo os seus métodos através da referência. Só que agora precisamos desenvolver o nosso método `.listar()`.
+
+[01:48] Agora, como nós temos uma DAO e nós vimos que toda parte de persistência vai ficar nessa DAO, vamos implementar o nosso método `listar()`depois do método `.salvar()`. Hoje nós temos uma classe de modelo, que representa o nosso produto. Quando eu mando listar sem nenhum filtro, ou seja, sem nenhum where na nossa query, ele vai listar todo mundo.
+
+[02:13] Então eu vou ter uma lista de produtos, porque se eu tiver um, ele vai ter uma lista com um produto; mas se tiver vários, vai ter uma lista com N produtos. Então o nosso método vai retornar uma lista de produtos e eu vou chamar ele de `listar()`, então fica `public List<Produto> listar()`. Eu já vou instanciar a nossa lista, que nós vamos precisar lá na frente.
+
+[02:36] E eu vou chamar ela de `produtos()`, e vou instanciar aqui `List<Produto> produtos = new ArrayList<Produto>();`. Vou escrever o nosso SQL, que vai ser um *select* simples, ele não vai conter nenhum filtro, como já falado anteriormente, então vamos só fazer um `String sql = "SELECT ID, NOME, DESCRICAO FROM PRODUTO";`, onde temos o nome, o ID e a descrição.
+
+[03:02] Como nós já estamos recebendo a nossa conexão pelo construtor, eu só preciso preparar, recuperar o meu Prepared Statement, e para isso eu vou usar `try(PreparedStatement pstm = connection.preparedStatement(sql));`, e passo o `(sql)`, que nós acabamos de escrever no ´String sql`. Lembrando sempre de adicionar o`throws SQLException`.
+
+[03:29] Com o Prepared Statement em mãos, eu só preciso agora mandar executar com `pstm.execute();`. E esse código vai me trazer um resultado , isso nós já fizemos, vocês lembram bem. Esse resultado é um `try(ResultSet rst = pstm.getResultSet())`. Então enquanto eu tiver resultado, enquanto eu tiver um próximo resultado, traga para mim, com `while(rst.next())`.
+
+[03:59] Só que agora estamos trabalhando com a nossa classe modelo. Então nada mais justo do que eu transformar esse `.getResultSet()`, que antes nós só guardávamos em strings, em integer e retornava, agora eu vou criar um produto desse `.getResultSet()`. Então, se vocês lembram bem, nós criamos um construtor em `Produto` para que quando eu quiser inserir um produto, eu já passo um nome e uma descrição.
+
+[04:27] E quando esse construtor for inserido, ele vai me retornar a sua chave gerada. Só que agora eu tenho um cenário diferente, esse `ProdutoDAO`, ele já tem o ID, já tem o nome, a descrição, então eu vou criar um novo construtor em `Produto`. Eu posso até fazer aqui, `public Produto`, só que agora ele vai conter todas as informações.
+
+[04:54] Então eu quero `public Produto(Integer id, String nome, String descricao)`. Vocês já vão entender porque eu estou fazendo isso. Então `this.id = id;`, `this.nome = nome;` e `this.descricao = descricao;`. Eu vou fazer isso agora porque quando eu for instanciar o meu `Produto` em `ProdutoDAO`, o que eu vou precisar fazer é o seguinte, eu vou usar esse `new Produto(id, nome, descricao)`.
+
+[05:30] E nesse `new Produto`, eu vou fazer assim, eu vou pegar o `srt.getInt(1),`, que vai estar no primeiro Index, que é o ID, vou pegar uma `rst.getString(2)`, que é o nosso nome, que está no segundo Index, e vou pegar outra `rst.getString(3)`, que é a nossa descrição, que está no terceiro Index. Pronto, esse `new Produto(rst.getInt(1), rst.getString(2), rst.getString(3));` eu agora estou transformando ele em um produto.
+
+[05:58] Como eu tenho que retornar a lista de produtos, o que eu vou fazer? Eu vou pegar a minha lista e vou `produtos.add(produto);`. Então o que eu estou fazendo? Eu recuperei o primeiro produto - na verdade eu recuperei a primeira linha do nosso banco de dados, transformei ela em produto e adicionei na minha lista de produtos, porque agora eu tenho que adicionar o `return produtos;`.
+
+[06:26] Eu vou retornar essa lista de produtos, que era intenção desde o começo. Então agora eu tenho o meu método já pronto, retornando um produto, agora já utilizando a nossa classe de modelo. No nosso método `TestaInsercaoComProduto`, agora eu vou mudar o nome dele, eu vou dar um "Refactor > Rename" e vou botar "TestaInsercaoEListagemComProduto", para fazer mais sentido.
+
+[06:57] Vou pedir para ele mudar em todo mundo que eu usei como referência. E agora eu vou fazer o seguinte, eu vou recuperar uma lista de produtos, que eu vou chamar `List<Produto> listaDeProdutos = produtoDAO.listar();`, vou chamar a nossa DAO e o método `listar();`. Para vermos se deu certo, eu vou fazer o seguinte, eu vou pegar a lista de produtos, vou usar o `stream()` para usar um `.foreach`.
+
+[07:29] Vou botar `lp`, de lista de produtos, vou usar a *lambda* e fazer o seguinte, como nós sobrescrevemos o `toString`, eu posso já dar um `println()` no objeto, então fica `listaDeProdutos.stream().foreach(lp -> System.out.println(lp));`. Quando sobrescrevemos o `Produto`, eu coloquei `("O produto criado foi:`, o que não vai fazer muito sentido na listagem.
+
+[08:00] Então eu vou botar `return String.format("O produto é: %d, %s, %s", this.id, this.nome, this.descricao)`. Na ´TestaInsercaoEListagemComProduto`, qual vai ser o objetivo agora? Nós vamos inserir a cômoda e depois vamos já mostrar os produtos que já existem na tabela, que são aqueles dois que viemos trabalhando desde o começo, e o novo produto, que é a cômoda.
+
+[08:24] para verificarmos se não tem nenhum lixo, vamos usar a nossa classe `TestaRemocao`. Não tinha. Agora, se eu executar o `TestaInsecaoEListagemComProduto`, ele tem que me trazer três produtos, exatamente isso: os dois produtos que viemos utilizando desde o começo, como eu informei, e o novo, que é a nossa cômoda vertical.
+
+[08:48] Agora nós vemos que o nosso código já ficou melhor trabalhado, digamos assim, porque eu tenho uma camada de persistência, onde eu tenho tudo o que é referente à persistência de produto, à listagem, à inserção, se eu tiver uma futura, eu posso colocar o remoção agora em `ProdutoDAO`, o remover. Enfim, tudo o que vai ser referente a produto e for trabalhar com as queries SQL, remover, o CRUD, digamos assim, vai ficar dentro de `ProdutoDAO`.
+
+[09:23] E as nossas classes passam a ficar mais enxutas, elas ficam apenas para testar essas nossas operações com banco de dados. Eu não tenho mais queries espalhadas em todo canto, eu só preciso mesmo instanciar a nossa DAO, passar uma conexão para ela e eu posso usar quantos métodos eu quiser, desde que faça sentido, é claro.
+
+[09:50] Então agora a nossa aplicação, ela já fica com uma cara cada vez mais de uma aplicação que você vai encontrar no mundo corporativo, nas empresas, nas grandes empresas. A preocupação é sempre essa, é melhorar o código, refatorar, não repetir código, usar padrões que já são utilizados no mundo todo, enfim é isso que viemos fazendo aqui.
+
+[10:15] A ideia é que saiamos com esse conhecimento, com essa questão bem aprimorada, para ser automático, já pensarmos em desenvolver códigos dessa maneira, de maneiras que qualquer desenvolvedor vai ver o seu código e falar: isso eu conheço. Enfim, porque a ideia é essa: você escrever códigos de fácil manutenção. Então é isso, aluno. Espero que vocês tenham gostado e até o próximo vídeo.
+
+**O que aprendemos?**
+
+Nesta aula, aprendemos que:
+
+- Para cada tabela de domínio, temos uma classe de domínio
+
+  - Por exemplo, a tabela `produtos` tem uma classe `Produto` associada
+  - Objetos dessa classe representa um registro na tabela
+
+- Para acessar a tabela, usaremos um padrão chamado
+
+   
+
+  *Data Access Object* (DAO)
+
+  - Para cada classe de domínio, existe um DAO. Por exemplo, a classe `Produto` possui um `ProdutoDao`
+  - Todos os métodos JDBC relacionados com o produto devem estar encapsulados no `ProdutoDao`
